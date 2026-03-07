@@ -1,86 +1,136 @@
-# 🌐 ROOM
+<p align="center">
+  <img src="favicon.svg" width="64" height="64" alt="ROOM logo" />
+</p>
 
-**A semantic memory layer for the spatial internet.**
+<h1 align="center">ROOM</h1>
 
-> Places hold memory. Multiple knowledge graphs coexist without collapsing.
+<p align="center">
+  <strong>A semantic memory layer for the spatial internet.</strong><br/>
+  <em>Places hold memory. Multiple knowledge graphs coexist without collapsing.</em>
+</p>
 
-[![PLACES Track](https://img.shields.io/badge/Track-PLACES-4A9EFF?style=flat-square)](https://omb.wiki/en/hackathon/tracks/places)
-[![Open Metaverse Hackathon](https://img.shields.io/badge/Hackathon-March%207--8%2C%202026-FFC44A?style=flat-square)](https://omb.wiki/en/hackathon)
-[![Frontier Tower](https://img.shields.io/badge/Location-Frontier%20Tower%2C%20SF-B44AFF?style=flat-square)](#)
+<p align="center">
+  <a href="https://room-openmetaverse.vercel.app"><img src="https://img.shields.io/badge/▶_Live_Demo-room--openmetaverse.vercel.app-7C6AFF?style=for-the-badge&logoColor=white" alt="Live Demo" /></a>
+</p>
+
+<p align="center">
+  <a href="https://omb.wiki/en/hackathon/tracks/places"><img src="https://img.shields.io/badge/🏆_Track-PLACES-4A9EFF?style=flat-square" alt="PLACES Track" /></a>
+  <a href="https://omb.wiki/en/hackathon"><img src="https://img.shields.io/badge/🏛️_Open_Metaverse_Hackathon-March_7--8,_2026-FFC44A?style=flat-square" alt="Hackathon" /></a>
+  <img src="https://img.shields.io/badge/📍_Frontier_Tower-San_Francisco-B44AFF?style=flat-square" alt="Location" />
+  <img src="https://img.shields.io/badge/Zero_Build_Step-Just_HTML%2FJS%2FJSON-69DB7C?style=flat-square" alt="Zero Build" />
+</p>
 
 ---
 
-## What is ROOM?
+## The Problem: Ghost Worlds 👻
 
-ROOM is a **metaontological layer** for spatial environments. It sits at the **Semantic level** of the spatial information stack — below the Visual (splats, textures), Geometric (meshes, volumes), and Physical (collision, dynamics) layers.
+Photorealistic Gaussian splats create stunning 3D environments — but they have **no memory**. No collision, no surface topology, no events, no searchability. Beautiful ghost worlds you can see but can't understand.
 
-Gaussian splats give you photorealistic 3D. **ROOM gives those places meaning.**
+**ROOM solves this differently.** Instead of fighting the ghost world with collision meshes, give it a semantic memory layer — a knowledge graph that gives coordinates meaning.
 
-### The Problem: Ghost Worlds
+> *Gaussian splats give you the Visual. ROOM gives you the Meaning.*
 
-Beautiful Gaussian splats have no collision, no surface topology, no memory. You can see a place but it can't remember anything. ROOM solves this differently — not with collision meshes, but with a **semantic knowledge graph** that gives coordinates memory.
+---
 
-### Four Ontological Primitives
+## Four Ontological Primitives
+
+ROOM reduces spatial memory to four atomic types — mirroring how the hippocampus encodes it.
 
 | Primitive | Symbol | Role |
-|-----------|--------|------|
-| **Place** | 📍 | Spatial coordinate or region. The irreducible ground. |
+|:---:|:---:|:---|
+| **Place** | 📍 | A spatial coordinate or region. The irreducible ground. |
 | **Event** | ⚡ | A happening anchored to a Place with a timestamp. |
-| **Perspective** | 👁️ | A viewpoint on an Event, carrying ontological metadata. |
-| **Artifact** | 📄 | A crystallized output — document, media, insight. |
+| **Perspective** | 👁️ | A viewpoint on an Event — carrying ontological metadata. |
+| **Artifact** | 📄 | A crystallized output — document, media, or insight. |
 
-Multiple Perspectives on the same Event coexist without collapsing. An architect sees structure. A sociologist sees gathering patterns. A mythologist sees stories. All are true simultaneously.
+Multiple Perspectives on the same Event coexist without collapsing. An architect sees structure. A sociologist sees gathering patterns. A mythologist sees story. **All are true simultaneously.**
 
 ---
 
-## Demo
+## Where ROOM Lives — The Spatial Stack
 
-**Live:** [room.vercel.app](https://room.vercel.app) *(deploy pending)*
+```
+┌──────────────────────────────────────────────────┐
+│  🎨  Visual        Pixels, textures, rendering   │  ← Gaussian Splats
+├──────────────────────────────────────────────────┤
+│  📐  Geometric     3D shape, volume, topology    │  ← Meshes
+├──────────────────────────────────────────────────┤
+│  ⚙️  Physical      Collision, dynamics, forces   │  ← Physics engines
+├──────────────────────────────────────────────────┤
+│  🧠  SEMANTIC      Meaning, memory, knowledge    │  ← ROOM ✦
+└──────────────────────────────────────────────────┘
+```
 
-### Pages
+ROOM operates at the **foundational Semantic layer** — below everything else. It adds the layer that Gaussian splats are missing: **what a place means**, not just what it looks like.
 
-| Page | Description |
+---
+
+## Live Demo
+
+**→ [room-openmetaverse.vercel.app](https://room-openmetaverse.vercel.app)**
+
+Three pages, zero build step:
+
+| Page | What it does |
 |------|-------------|
-| `index.html` | Landing — primitives, demo flow, Frontier Tower locations |
-| `viewer.html` | 3D viewer — Three.js scene with semantic overlays + guided tour |
-| `editor.html` | Graph editor — D3.js force-directed graph + Claudesidian PKG bridge |
+| **Landing** (`/`) | Spatial stack, Ghost World problem/solution, four primitives, demo flow, Frontier Tower locations |
+| **Viewer** (`/viewer`) | 3D Three.js scene with semantic node overlays, guided 11-stop tour, perspective switching |
+| **Editor** (`/editor`) | D3.js force-directed knowledge graph editor with full CRUD, JSON export, and Claudesidian PKG bridge |
 
-### Quick Start
+---
+
+## Quick Start
 
 ```bash
-# Clone
 git clone https://github.com/innercartography/ROOM.git
 cd ROOM
 
-# Serve (no build step!)
+# No install. No build. Just serve.
 npx serve . -l 3000
-# → http://localhost:3000
 ```
+
+Open [localhost:3000](http://localhost:3000) and explore.
 
 ---
 
 ## Architecture
 
 ```
-world.json          ← Flat JSON graph (nodes + edges + tour)
-├── Place nodes     ← Spatial anchors (Frontier Tower locations)
-├── Event nodes     ← Timestamped happenings
-├── Perspective nodes ← Multi-ontology viewpoints
-├── Artifact nodes  ← Produced outputs
-└── Edges           ← anchored_at, observes, produced_by, leads_to
-
-room.js             ← Shared data layer (CRUD, queries, validation)
-styles.css          ← Design system (dark space theme, glassmorphism)
-viewer.html         ← Three.js + CSS2DRenderer
-editor.html         ← D3.js force-directed graph
-index.html          ← Landing page
+room-openmetaverse/
+├── index.html          Landing page — hero, spatial stack, primitives, demo flow
+├── viewer.html         Three.js 3D viewer + CSS2DRenderer + guided tour
+├── editor.html         D3.js force-directed graph editor + entity sidebar
+├── room.js             Shared data layer — CRUD, queries, validation, events
+├── styles.css          Design system — dark space theme, glassmorphism, animations
+├── sample-world.json   24-node demo graph (Frontier Tower hackathon data)
+├── world.json          User's active world file
+├── favicon.svg         ROOM logo
+└── vercel.json         Deployment config (clean URLs, CORS for JSON)
 ```
+
+### `room.js` — The Data Layer
+
+A zero-dependency shared module exposing the full ROOM API:
+
+```javascript
+ROOM.loadWorldFromURL('sample-world.json');  // Load a world
+ROOM.getPlaces();                             // → all Place nodes
+ROOM.getEventsAtPlace('place-lobby');         // → Events anchored here
+ROOM.getPerspectivesForEvent('event-opening');// → Multiple viewpoints
+ROOM.getPlaceContext('place-2nd-floor');      // → Full context tree
+ROOM.obsidianToPerspective(markdown);         // → Claudesidian bridge
+ROOM.exportWorld();                           // → Portable JSON
+```
+
+---
 
 ## Data Format: `world.json` v0.1
 
+Flat JSON graph — portable, human-readable, no build step required.
+
 ```json
 {
-  "version": "0.1",
+  "version": "room/v0.1",
   "meta": { "title": "...", "created": "..." },
   "nodes": [
     { "id": "place-exterior", "type": "place", "label": "Frontier Tower", "position": [0,0,0] },
@@ -90,18 +140,24 @@ index.html          ← Landing page
   "edges": [
     { "source": "event-kickoff", "target": "place-exterior", "type": "anchored_at" }
   ],
-  "tour": { "name": "...", "waypoints": [...] }
+  "tour": { "title": "...", "waypoints": [{ "node": "...", "narration": "..." }] }
 }
 ```
+
+**Edge types:** `anchored_at` · `observes` · `produced_by` · `leads_to`
+
+**Ontologies:** `architectural` · `social` · `experiential` · `mythological` · `technical` · `personal`
 
 ---
 
 ## Integrations
 
-- **[arrival.space](https://arrival.space)** — Gaussian splat hosting + streaming
-- **[Claudesidian](https://github.com/heyitsnoah/claudesidian)** — Obsidian markdown → ROOM Perspective nodes (personal knowledge graphs)
-- **[Polycam](https://poly.cam)** — Spatial capture → .ply export
-- **RP1 / Metaverse Standards Forum** — Open metaverse interoperability
+| Partner | Role |
+|---------|------|
+| [**arrival.space**](https://arrival.space) | Gaussian splat hosting + streaming |
+| [**Claudesidian**](https://github.com/heyitsnoah/claudesidian) | Obsidian markdown → ROOM Perspective nodes (personal knowledge graphs) |
+| [**Polycam**](https://poly.cam) | Spatial capture → `.ply` export for Place nodes |
+| **RP1 / Metaverse Standards Forum** | Open metaverse interoperability standards |
 
 ---
 
@@ -109,16 +165,14 @@ index.html          ← Landing page
 
 **Open Metaverse Hackathon** · March 7–8, 2026 · Frontier Tower, San Francisco
 
-ROOM is a **PLACES track** entry. We're building a digital twin of Frontier Tower at the semantic level — capturing 4 locations with Polycam, anchoring events as they unfold, and letting multiple perspectives annotate the same space through different ontological lenses.
+ROOM is a **PLACES track** entry — building a semantic digital twin of Frontier Tower. Four spatial captures, multiple ontological perspectives, one shared memory graph.
 
-### Frontier Tower Locations
-
-| # | Location | Status |
-|---|----------|--------|
-| 1 | 🏛️ Building Exterior | Scan at hackathon |
-| 2 | 🚪 Main Lobby | Scan at hackathon |
-| 3 | ⚡ 2nd Floor Hackathon Space | Scan at hackathon |
-| 4 | 🛸 Secret UFO Room | Find it first 👽 |
+| # | Location | Description |
+|:---:|----------|------------|
+| 1 | 🏛️ **Building Exterior** | Street-level approach to Frontier Tower |
+| 2 | 🚪 **Main Lobby** | Threshold between the street and the spatial internet |
+| 3 | ⚡ **2nd Floor Hackathon Space** | Where builders gather |
+| 4 | 🛸 **The UFO Room** | The secret bonus level 👽 |
 
 ---
 
