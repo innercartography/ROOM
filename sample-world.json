@@ -1,0 +1,534 @@
+{
+    "version": "room/v0.1",
+    "meta": {
+        "title": "Frontier Tower — Open Metaverse Hackathon",
+        "description": "Semantic memory of the first Open Metaverse Hackathon, March 7-8 2026, Frontier Tower, San Francisco. Four spatial captures, multiple ontological perspectives, one shared memory.",
+        "created": "2026-03-07T09:00:00-08:00",
+        "schema": "https://github.com/innercartography/ROOM",
+        "track": "PLACES"
+    },
+    "nodes": [
+        {
+            "id": "place-exterior",
+            "type": "place",
+            "label": "Frontier Tower — Exterior",
+            "description": "The street-level approach to Frontier Tower at 995 Market St. Where arrival begins.",
+            "position": [
+                0,
+                0,
+                0
+            ],
+            "splat": "splats/ft-exterior.ply",
+            "arrivalSpace": "",
+            "icon": "🏛️"
+        },
+        {
+            "id": "place-lobby",
+            "type": "place",
+            "label": "Main Lobby",
+            "description": "The threshold between the street and the spatial internet. A liminal zone between worlds.",
+            "position": [
+                0,
+                0,
+                50
+            ],
+            "splat": "splats/ft-lobby.ply",
+            "arrivalSpace": "",
+            "icon": "🚪"
+        },
+        {
+            "id": "place-2nd-floor",
+            "type": "place",
+            "label": "2nd Floor — Hackathon Space",
+            "description": "Where builders gather. Desks, screens, whiteboards, and the hum of creation. The primary action space of the Open Metaverse Hackathon.",
+            "position": [
+                0,
+                5,
+                100
+            ],
+            "splat": "splats/ft-2nd-floor.ply",
+            "arrivalSpace": "",
+            "icon": "⚡"
+        },
+        {
+            "id": "place-ufo-room",
+            "type": "place",
+            "label": "The UFO Room",
+            "description": "A themed room hidden within the building. The secret bonus level. 🛸",
+            "position": [
+                20,
+                5,
+                120
+            ],
+            "splat": "splats/ft-ufo-room.ply",
+            "arrivalSpace": "",
+            "icon": "🛸",
+            "secret": true
+        },
+        {
+            "id": "event-registration",
+            "type": "event",
+            "label": "Registration & Breakfast",
+            "description": "Check-in, networking, review tracks. Light breakfast and coffee. The calm before the build.",
+            "place": "place-lobby",
+            "position": [
+                1,
+                1,
+                51
+            ],
+            "time": "2026-03-07T10:00:00-08:00",
+            "icon": "☕"
+        },
+        {
+            "id": "event-opening",
+            "type": "event",
+            "label": "Kickoff & Opening Remarks",
+            "description": "Sean Mann (Co-Founder & CEO, RP1) and Dean Robertson (Co-Founder & Chief Architect, RP1) introduce the vision. Open standards, open fabrics, open future.",
+            "place": "place-2nd-floor",
+            "position": [
+                2,
+                6,
+                102
+            ],
+            "time": "2026-03-07T12:00:00-08:00",
+            "icon": "🎤"
+        },
+        {
+            "id": "event-workshop-vcn",
+            "type": "event",
+            "label": "Workshop: AI & Vibe Coding",
+            "description": "Using Claude & Gemini to accelerate spatial development. Live coding demo with VCN.",
+            "place": "place-2nd-floor",
+            "position": [
+                -5,
+                5.5,
+                97
+            ],
+            "time": "2026-03-07T13:30:00-08:00",
+            "icon": "🤖"
+        },
+        {
+            "id": "event-workshop-manifolder",
+            "type": "event",
+            "label": "Workshop: Manifolder & MCP",
+            "description": "Patched Reality demonstrates Manifolder — connecting AI Agents to browse, edit, and connect scenes and servers across fabrics using MCP.",
+            "place": "place-2nd-floor",
+            "position": [
+                -3,
+                5.5,
+                103
+            ],
+            "time": "2026-03-07T15:30:00-08:00",
+            "icon": "🔗"
+        },
+        {
+            "id": "event-first-splat",
+            "type": "event",
+            "label": "First Polycam Capture",
+            "description": "The first Gaussian splat of the hackathon space is captured. The building begins to remember.",
+            "place": "place-2nd-floor",
+            "position": [
+                -3,
+                5.5,
+                98
+            ],
+            "time": "2026-03-07T15:00:00-08:00",
+            "icon": "📸"
+        },
+        {
+            "id": "event-lightning-talks",
+            "type": "event",
+            "label": "Lightning Talks",
+            "description": "3-4 rapid 10-min talks: Common pitfalls, debugging tips, deployment strategies for spatial apps.",
+            "place": "place-2nd-floor",
+            "position": [
+                4,
+                6,
+                99
+            ],
+            "time": "2026-03-07T20:00:00-08:00",
+            "icon": "⚡"
+        },
+        {
+            "id": "event-ufo-discovery",
+            "type": "event",
+            "label": "UFO Room Discovery",
+            "description": "Someone finds the hidden UFO-themed room. The secret level is unlocked.",
+            "place": "place-ufo-room",
+            "position": [
+                21,
+                5.5,
+                121
+            ],
+            "time": "2026-03-07T14:00:00-08:00",
+            "icon": "👽"
+        },
+        {
+            "id": "event-code-complete",
+            "type": "event",
+            "label": "🚩 Code Complete",
+            "description": "4:00 PM Sunday. Keyboards down. No more coding. Deploy and prepare for judging.",
+            "place": "place-2nd-floor",
+            "position": [
+                0,
+                7,
+                100
+            ],
+            "time": "2026-03-08T16:00:00-08:00",
+            "icon": "🏁"
+        },
+        {
+            "id": "event-demo-day",
+            "type": "event",
+            "label": "Judging & Demo Showcase",
+            "description": "Teams demo at stations: 3 min demo + 2 min Q&A. Judges rotate through floors evaluating all projects. Categories: Best Tools, Best Places, Best AI, Best Overall, People's Choice.",
+            "place": "place-2nd-floor",
+            "position": [
+                0,
+                6,
+                105
+            ],
+            "time": "2026-03-08T16:00:00-08:00",
+            "icon": "🏆"
+        },
+        {
+            "id": "event-awards",
+            "type": "event",
+            "label": "Awards Ceremony",
+            "description": "Winners announced. Best Tools, Best Places, Best AI, Best Overall, People's Choice. Then the GDC Spatial XR Mixer kicks off.",
+            "place": "place-2nd-floor",
+            "position": [
+                3,
+                7,
+                104
+            ],
+            "time": "2026-03-08T17:00:00-08:00",
+            "icon": "🎖️"
+        },
+        {
+            "id": "perspective-architectural",
+            "type": "perspective",
+            "label": "Built Environment",
+            "description": "The building through the lens of architectural analysis.",
+            "event": "event-opening",
+            "ontology": "architectural",
+            "visibility": "public",
+            "content": "Frontier Tower's 2nd floor is a post-industrial open plan — exposed ductwork, polished concrete, floor-to-ceiling glass on the south wall. The space was designed for flexible use, which is why it works for a hackathon: no fixed walls, modular furniture, excellent natural light. The ceiling height (~4.2m) creates a sense of openness rare in SF commercial real estate.",
+            "position": [
+                5,
+                7,
+                101
+            ],
+            "icon": "🏗️"
+        },
+        {
+            "id": "perspective-social",
+            "type": "perspective",
+            "label": "Community Gathering",
+            "description": "The hackathon as a social phenomenon.",
+            "event": "event-opening",
+            "ontology": "social",
+            "visibility": "public",
+            "content": "Over a hundred builders, artists, and thinkers gathered — drawn not by a product launch but by a shared conviction that the spatial internet should be open. The Khronos Group and Metaverse Standards Forum sponsored. RP1's Sean Mann spoke about infrastructure, not platforms. The energy was collaborative, not competitive.",
+            "position": [
+                6,
+                6.5,
+                103
+            ],
+            "icon": "🤝"
+        },
+        {
+            "id": "perspective-experiential",
+            "type": "perspective",
+            "label": "First-Person Experience",
+            "description": "What it felt like to be there.",
+            "event": "event-first-splat",
+            "ontology": "experiential",
+            "visibility": "public",
+            "content": "The Polycam scan took maybe thirty seconds. But watching the point cloud assemble on screen — seeing the room I was standing in become a digital twin in real time — something shifted. The room didn't just look like the room. It *was* the room, or at least a memory of it. That's when the ROOM concept stopped being abstract. Places can remember.",
+            "position": [
+                -5,
+                6.5,
+                99
+            ],
+            "icon": "✨"
+        },
+        {
+            "id": "perspective-ufo-lore",
+            "type": "perspective",
+            "label": "UFO Lore",
+            "description": "The UFO room through the lens of extraterrestrial mythology.",
+            "event": "event-ufo-discovery",
+            "ontology": "mythological",
+            "visibility": "public",
+            "content": "Silver mylar, string lights in concentric circles, a central 'landing pad' from an old conference table. The Arecibo message taped to the wall. Glow-in-the-dark stars on the ceiling. Kitschy and earnest and perfect — a space that took its own absurdity seriously. In ROOM terms, this is what happens when a place accumulates lore: the physical space becomes a substrate for imagination.",
+            "position": [
+                22,
+                6.5,
+                122
+            ],
+            "icon": "🛸"
+        },
+        {
+            "id": "perspective-workshop-spatial",
+            "type": "perspective",
+            "label": "Spatial Dev Tools",
+            "description": "The Manifolder workshop through the lens of developer tooling.",
+            "event": "event-workshop-manifolder",
+            "ontology": "technical",
+            "visibility": "public",
+            "content": "Patched Reality's Manifolder is an MCP server for spatial scenes — you can point Claude or Cursor at it to browse, edit, and connect scenes across fabrics. During the workshop, they showed live editing of a spatial fabric through natural language. The implications: AI agents that understand 3D space as a first-class data structure, not just text.",
+            "position": [
+                -4,
+                6.5,
+                104
+            ],
+            "icon": "🔧"
+        },
+        {
+            "id": "perspective-personal-pkg",
+            "type": "perspective",
+            "label": "Personal Knowledge Graph",
+            "description": "A private annotation from a Claudesidian vault.",
+            "event": "event-demo-day",
+            "ontology": "personal",
+            "visibility": "private",
+            "content": "# Demo Day Reflections\n\nThe ROOM prototype worked. When I showed perspective-switching between the architectural and experiential views of the same space, I saw people lean forward. That's the tell.\n\n## Key Insight\nThe spatial internet doesn't need better rendering. It needs better memory.\n\n## Next Steps\n- [ ] Integrate with RP1 Fabric\n- [ ] Add video overlays\n- [ ] Build community onboarding flow",
+            "src": "claudesidian://01_Projects/ROOM/demo-day-reflections.md",
+            "position": [
+                2,
+                7,
+                106
+            ],
+            "icon": "🔒"
+        },
+        {
+            "id": "artifact-splat-exterior",
+            "type": "artifact",
+            "label": "Exterior Gaussian Splat",
+            "description": "Polycam capture of Frontier Tower's street-level facade.",
+            "perspective": "perspective-architectural",
+            "src": "splats/ft-exterior.ply",
+            "format": "ply",
+            "position": [
+                7,
+                8,
+                100
+            ],
+            "icon": "🗂️"
+        },
+        {
+            "id": "artifact-group-photo",
+            "type": "artifact",
+            "label": "Hackathon Group Photo",
+            "description": "The traditional group photo. Everyone who stayed until the end.",
+            "perspective": "perspective-social",
+            "src": "photos/group-photo.jpg",
+            "format": "image",
+            "position": [
+                8,
+                7.5,
+                104
+            ],
+            "icon": "📷"
+        },
+        {
+            "id": "artifact-arecibo-printout",
+            "type": "artifact",
+            "label": "Arecibo Message Printout",
+            "description": "Someone printed the Arecibo message and taped it to the UFO room wall.",
+            "perspective": "perspective-ufo-lore",
+            "src": "photos/arecibo-wall.jpg",
+            "format": "image",
+            "position": [
+                23,
+                7,
+                123
+            ],
+            "icon": "📡"
+        },
+        {
+            "id": "artifact-room-worldjson",
+            "type": "artifact",
+            "label": "ROOM world.json Schema",
+            "description": "The data format itself is an artifact — a crystallized output of the ROOM project. Flat JSON, no build step, portable across instances.",
+            "perspective": "perspective-workshop-spatial",
+            "src": "world.json",
+            "format": "json",
+            "position": [
+                -6,
+                7.5,
+                105
+            ],
+            "icon": "📋"
+        }
+    ],
+    "edges": [
+        {
+            "source": "event-registration",
+            "target": "place-lobby",
+            "type": "anchored_at"
+        },
+        {
+            "source": "event-opening",
+            "target": "place-2nd-floor",
+            "type": "anchored_at"
+        },
+        {
+            "source": "event-workshop-vcn",
+            "target": "place-2nd-floor",
+            "type": "anchored_at"
+        },
+        {
+            "source": "event-workshop-manifolder",
+            "target": "place-2nd-floor",
+            "type": "anchored_at"
+        },
+        {
+            "source": "event-first-splat",
+            "target": "place-2nd-floor",
+            "type": "anchored_at"
+        },
+        {
+            "source": "event-lightning-talks",
+            "target": "place-2nd-floor",
+            "type": "anchored_at"
+        },
+        {
+            "source": "event-ufo-discovery",
+            "target": "place-ufo-room",
+            "type": "anchored_at"
+        },
+        {
+            "source": "event-code-complete",
+            "target": "place-2nd-floor",
+            "type": "anchored_at"
+        },
+        {
+            "source": "event-demo-day",
+            "target": "place-2nd-floor",
+            "type": "anchored_at"
+        },
+        {
+            "source": "event-awards",
+            "target": "place-2nd-floor",
+            "type": "anchored_at"
+        },
+        {
+            "source": "perspective-architectural",
+            "target": "event-opening",
+            "type": "observes"
+        },
+        {
+            "source": "perspective-social",
+            "target": "event-opening",
+            "type": "observes"
+        },
+        {
+            "source": "perspective-experiential",
+            "target": "event-first-splat",
+            "type": "observes"
+        },
+        {
+            "source": "perspective-ufo-lore",
+            "target": "event-ufo-discovery",
+            "type": "observes"
+        },
+        {
+            "source": "perspective-workshop-spatial",
+            "target": "event-workshop-manifolder",
+            "type": "observes"
+        },
+        {
+            "source": "perspective-personal-pkg",
+            "target": "event-demo-day",
+            "type": "observes"
+        },
+        {
+            "source": "artifact-splat-exterior",
+            "target": "perspective-architectural",
+            "type": "produced_by"
+        },
+        {
+            "source": "artifact-group-photo",
+            "target": "perspective-social",
+            "type": "produced_by"
+        },
+        {
+            "source": "artifact-arecibo-printout",
+            "target": "perspective-ufo-lore",
+            "type": "produced_by"
+        },
+        {
+            "source": "artifact-room-worldjson",
+            "target": "perspective-workshop-spatial",
+            "type": "produced_by"
+        },
+        {
+            "source": "place-exterior",
+            "target": "place-lobby",
+            "type": "leads_to"
+        },
+        {
+            "source": "place-lobby",
+            "target": "place-2nd-floor",
+            "type": "leads_to"
+        },
+        {
+            "source": "place-2nd-floor",
+            "target": "place-ufo-room",
+            "type": "leads_to",
+            "label": "🔍 Secret Passage"
+        }
+    ],
+    "tour": {
+        "title": "A Walk Through the First Open Metaverse Hackathon",
+        "description": "Follow the thread of spatial memory from the street to the secret room. Each stop holds multiple perspectives — switch between them to see the same place through different eyes.",
+        "waypoints": [
+            {
+                "node": "place-exterior",
+                "narration": "You're standing outside Frontier Tower in San Francisco's SoMa district. March 7th, 2026. The first Open Metaverse Hackathon is about to begin. Step inside."
+            },
+            {
+                "node": "place-lobby",
+                "narration": "The lobby is a threshold — the last moment of the ordinary world before you enter the spatial internet. The elevator is waiting."
+            },
+            {
+                "node": "event-opening",
+                "narration": "The 2nd floor. Sean Mann is at the mic. 'The metaverse should be open, interoperable, and accessible — like the early web.' The room nods. Building begins."
+            },
+            {
+                "node": "event-workshop-manifolder",
+                "narration": "Patched Reality demos Manifolder — an MCP server that lets AI agents edit spatial scenes through natural language. The future of spatial dev tooling, live on stage."
+            },
+            {
+                "node": "event-first-splat",
+                "narration": "Someone pulls out Polycam and scans the room. In thirty seconds, the space has a digital memory. ROOM's first Place node is born."
+            },
+            {
+                "node": "perspective-architectural",
+                "narration": "Switch perspective. See the same room through an architect's eyes — structure, materials, spatial relationships. The building has its own story."
+            },
+            {
+                "node": "perspective-social",
+                "narration": "Switch again. Community lens — who came, why they came, connections made. The building doesn't just have walls. It has witnesses."
+            },
+            {
+                "node": "event-ufo-discovery",
+                "narration": "Someone found it. The hidden room. The secret level. 🛸"
+            },
+            {
+                "node": "perspective-ufo-lore",
+                "narration": "Silver mylar, glow-in-the-dark stars, the Arecibo message on the wall. A room that takes its own absurdity seriously. Places accumulate lore."
+            },
+            {
+                "node": "event-demo-day",
+                "narration": "Sunday afternoon. Demo day. The spatial internet has memory now. Places can remember. And you just walked through the proof."
+            },
+            {
+                "node": "event-awards",
+                "narration": "Best Tools. Best Places. Best AI. Best Overall. People's Choice. The open metaverse has its first champions."
+            }
+        ]
+    }
+}

@@ -1,0 +1,16 @@
+{
+  "version": "room/v0.1",
+  "meta": {
+    "title": "ROOM — Semantic Memory Layer",
+    "description": "A metaontological layer for spatial environments. Places hold memory; multiple knowledge graphs coexist without collapsing.",
+    "created": "2026-03-07T00:00:00Z",
+    "schema": "https://github.com/innercartography/ROOM"
+  },
+  "nodes": [],
+  "edges": [],
+  "tour": {
+    "title": "",
+    "description": "",
+    "waypoints": []
+  }
+}
