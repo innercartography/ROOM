@@ -343,7 +343,9 @@
         <div class="graph-container">
             <div class="graph-toolbar">
                 <button class="btn btn-sm" id="btnZoomFit" title="Fit graph to view">🔍 Fit</button>
-                <button class="btn btn-sm" id="btnRestart" title="Restart simulation">🔄 Reset</button>
+                <button class="btn btn-sm" id="btnRestart" title="Restart simulation">🔄 Reset Layout</button>
+                <button class="btn btn-sm" id="btnClearStorage" title="Clear saved data and reload defaults"
+                    style="margin-left:auto; opacity:0.6">🗑️ Reset Data</button>
             </div>
             <div id="graphCanvas"></div>
             <div class="graph-stats" id="graphStats"></div>
@@ -541,7 +543,15 @@ Content goes here…" rows="10" style="margin-top:var(--space-md)"></textarea>
            Init
            ═══════════════════════════════════════════ */
         async function init() {
-            await ROOM.loadWorldFromURL('sample-world.json');
+            // Try localStorage first, fall back to sample-world.json
+            const saved = ROOM.loadFromStorage();
+            if (saved) {
+                console.log('ROOM Editor: loaded from localStorage');
+            } else {
+                await ROOM.loadWorldFromURL('sample-world.json');
+                ROOM.saveToStorage(); // seed localStorage on first load
+                console.log('ROOM Editor: loaded from sample-world.json (first run)');
+            }
 
             ROOM.getOntologies().forEach(o => activeOntologies.add(o));
 
@@ -777,6 +787,7 @@ Content goes here…" rows="10" style="margin-top:var(--space-md)"></textarea>
                     const id = btn.dataset.delete;
                     if (confirm(`Delete node "${id}"?`)) {
                         ROOM.removeNode(id);
+                        ROOM.saveToStorage();
                         updateGraph();
                         buildNodeList();
                         updateStats();
@@ -875,6 +886,7 @@ Content goes here…" rows="10" style="margin-top:var(--space-md)"></textarea>
             }
 
             ROOM.addNode(node);
+            ROOM.saveToStorage();
             updateGraph();
             buildNodeList();
             buildOntologyChips();
@@ -935,6 +947,7 @@ Content goes here…" rows="10" style="margin-top:var(--space-md)"></textarea>
             }
 
             ROOM.addNode(perspective);
+            ROOM.saveToStorage();
             updateGraph();
             buildNodeList();
             buildOntologyChips();
@@ -957,6 +970,7 @@ Content goes here…" rows="10" style="margin-top:var(--space-md)"></textarea>
             try {
                 const data = JSON.parse(document.getElementById('jsonEditor').value);
                 ROOM.loadWorld(data);
+                ROOM.saveToStorage();
                 updateGraph();
                 buildNodeList();
                 buildOntologyChips();
@@ -1076,6 +1090,12 @@ Content goes here…" rows="10" style="margin-top:var(--space-md)"></textarea>
             });
             document.getElementById('btnRestart').addEventListener('click', () => {
                 updateGraph();
+            });
+            document.getElementById('btnClearStorage').addEventListener('click', () => {
+                if (confirm('Reset to default data? Your edits will be lost.')) {
+                    ROOM.clearStorage();
+                    location.reload();
+                }
             });
 
             // Resize

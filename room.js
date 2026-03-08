@@ -50,6 +50,7 @@ const ROOM = (() => {
     /* ── State ── */
     let _world = null;
     let _listeners = [];
+    const STORAGE_KEY = 'room_world_v1';
 
     /**
      * Create an empty world graph
@@ -341,6 +342,39 @@ const ROOM = (() => {
         _listeners
             .filter(l => l.event === event || l.event === '*')
             .forEach(l => l.callback(event, data));
+        // Auto-persist on any mutation
+        if (_world && event !== 'load') _persist();
+    }
+
+    /* ── localStorage persistence ── */
+
+    function _persist() {
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(_world));
+        } catch (e) {
+            console.warn('ROOM: localStorage save failed', e);
+        }
+    }
+
+    function saveToStorage() {
+        _persist();
+    }
+
+    function loadFromStorage() {
+        try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (raw) {
+                _world = JSON.parse(raw);
+                return _world;
+            }
+        } catch (e) {
+            console.warn('ROOM: localStorage load failed', e);
+        }
+        return null;
+    }
+
+    function clearStorage() {
+        localStorage.removeItem(STORAGE_KEY);
     }
 
     /* ── Auto-create edges based on node relationships ── */
@@ -394,7 +428,8 @@ const ROOM = (() => {
         getOntologies, getPerspectivesByOntology, getConnectedNodes, getPlaceContext,
         getTour, setTour, getTourWaypoints,
         obsidianToPerspective,
-        on, validate
+        on, validate,
+        saveToStorage, loadFromStorage, clearStorage
     };
 })();
 
