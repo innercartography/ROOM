@@ -1,0 +1,125 @@
+{
+    "sName": "ROOM — Frontier Tower",
+    "aChildren": [
+        {
+            "sName": "Lobby Scan",
+            "pResource": {
+                "sReference": "Lobby.glb"
+            },
+            "pTransform": {
+                "aPosition": [
+                    0,
+                    0,
+                    0
+                ],
+                "aRotation": [
+                    0,
+                    0,
+                    0,
+                    1
+                ],
+                "aScale": [
+                    1,
+                    1,
+                    1
+                ]
+            }
+        },
+        {
+            "sName": "Hackathon Space Scan",
+            "pResource": {
+                "sReference": "3_7_2026.glb"
+            },
+            "pTransform": {
+                "aPosition": [
+                    15,
+                    0,
+                    0
+                ],
+                "aRotation": [
+                    0,
+                    0,
+                    0,
+                    1
+                ],
+                "aScale": [
+                    1,
+                    1,
+                    1
+                ]
+            }
+        },
+        {
+            "sName": "Knowledge: Window Insight",
+            "pResource": {
+                "sReference": "capsule.glb"
+            },
+            "pTransform": {
+                "aPosition": [
+                    20,
+                    2,
+                    3
+                ],
+                "aRotation": [
+                    0,
+                    0,
+                    0,
+                    1
+                ],
+                "aScale": [
+                    0.3,
+                    0.3,
+                    0.3
+                ]
+            }
+        },
+        {
+            "sName": "Knowledge: Registration",
+            "pResource": {
+                "sReference": "capsule.glb"
+            },
+            "pTransform": {
+                "aPosition": [
+                    2,
+                    1.5,
+                    2
+                ],
+                "aRotation": [
+                    0,
+                    0,
+                    0,
+                    1
+                ],
+                "aScale": [
+                    0.2,
+                    0.2,
+                    0.2
+                ]
+            }
+        },
+        {
+            "sName": "Knowledge: Opening Remarks",
+            "pResource": {
+                "sReference": "capsule.glb"
+            },
+            "pTransform": {
+                "aPosition": [
+                    17,
+                    2,
+                    -2
+                ],
+                "aRotation": [
+                    0,
+                    0,
+                    0,
+                    1
+                ],
+                "aScale": [
+                    0.2,
+                    0.2,
+                    0.2
+                ]
+            }
+        }
+    ]
+}

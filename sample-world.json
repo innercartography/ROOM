@@ -18,8 +18,8 @@
                 0,
                 0
             ],
-            "splat": "splats/ft-exterior.ply",
-            "arrivalSpace": "",
+            "glb": "3_7_2026.glb",
+            "rp1Scene": "https://team044.hackathon.rp1.dev",
             "icon": "🏛️"
         },
         {
@@ -32,8 +32,8 @@
                 0,
                 50
             ],
-            "splat": "splats/ft-lobby.ply",
-            "arrivalSpace": "",
+            "glb": "Lobby.glb",
+            "rp1Scene": "https://team044.hackathon.rp1.dev",
             "icon": "🚪"
         },
         {
@@ -46,8 +46,8 @@
                 5,
                 100
             ],
-            "splat": "splats/ft-2nd-floor.ply",
-            "arrivalSpace": "",
+            "glb": "3_7_2026.glb",
+            "rp1Scene": "https://team044.hackathon.rp1.dev",
             "icon": "⚡"
         },
         {
@@ -60,8 +60,8 @@
                 5,
                 120
             ],
-            "splat": "splats/ft-ufo-room.ply",
-            "arrivalSpace": "",
+            "glb": "",
+            "rp1Scene": "https://team044.hackathon.rp1.dev",
             "icon": "🛸",
             "secret": true
         },
@@ -206,6 +206,20 @@
             "icon": "🎖️"
         },
         {
+            "id": "event-window-insight",
+            "type": "event",
+            "label": "The Window Moment",
+            "description": "An RP1 founder gestures toward the floor-to-ceiling glass and delivers the thesis: all of real estate will need to spatialize. The window becomes a symbol.",
+            "place": "place-2nd-floor",
+            "position": [
+                8,
+                6,
+                100
+            ],
+            "time": "2026-03-07T12:15:00-08:00",
+            "icon": "🪟"
+        },
+        {
             "id": "perspective-architectural",
             "type": "perspective",
             "label": "Built Environment",
@@ -220,6 +234,23 @@
                 101
             ],
             "icon": "🏗️"
+        },
+        {
+            "id": "perspective-spatial-real-estate",
+            "type": "perspective",
+            "label": "The Spatialization Thesis",
+            "description": "The RP1 founder's insight about the future of real estate, anchored at the window.",
+            "event": "event-window-insight",
+            "ontology": "architectural",
+            "visibility": "public",
+            "content": "'Look out the window. All of real estate will need to spatialize over the next two to three years.'\n\nThis wasn't marketing. Standing at 995 Market St, looking out at the San Francisco skyline, the founder was stating something structural: every building, every storefront, every room will eventually have a spatial twin. Not as a novelty — as infrastructure.\n\nThe window itself becomes the metaphor. You look through glass at the physical city and see the future: the same city, spatially indexed, semantically tagged, collaboratively annotated. ROOM doesn't just remember what was said here. It gives the window itself a memory — this is where the thesis was spoken.",
+            "position": [
+                9,
+                7,
+                100
+            ],
+            "icon": "🪟",
+            "capsule": true
         },
         {
             "id": "perspective-social",
@@ -465,6 +496,16 @@
             "type": "produced_by"
         },
         {
+            "source": "event-window-insight",
+            "target": "place-2nd-floor",
+            "type": "anchored_at"
+        },
+        {
+            "source": "perspective-spatial-real-estate",
+            "target": "event-window-insight",
+            "type": "observes"
+        },
+        {
             "source": "place-exterior",
             "target": "place-lobby",
             "type": "leads_to"
@@ -504,6 +545,10 @@
             {
                 "node": "event-first-splat",
                 "narration": "Someone pulls out Polycam and scans the room. In thirty seconds, the space has a digital memory. ROOM's first Place node is born."
+            },
+            {
+                "node": "perspective-spatial-real-estate",
+                "narration": "The window. An RP1 founder looks out at the San Francisco skyline and says: 'All of real estate will need to spatialize.' The window remembers. This is ROOM's core thesis — places hold memory, and that memory can be refined."
             },
             {
                 "node": "perspective-architectural",

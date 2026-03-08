@@ -439,6 +439,141 @@
         transform: rotate(360deg);
       }
     }
+
+    /* ── Capsule Markers (pulsing knowledge nodes) ── */
+    .node-marker.capsule {
+      background: linear-gradient(135deg, rgba(124, 106, 255, 0.3), rgba(255, 106, 220, 0.3));
+      border: 2px solid rgba(124, 106, 255, 0.6);
+      color: var(--room-accent-bright);
+      animation: capsulePulse 3s ease-in-out infinite;
+    }
+
+    .node-marker.capsule::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: inherit;
+      border: 1px solid rgba(124, 106, 255, 0.3);
+      animation: capsuleRing 3s ease-in-out infinite;
+    }
+
+    @keyframes capsulePulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 8px rgba(124, 106, 255, 0.3);
+      }
+
+      50% {
+        box-shadow: 0 0 20px rgba(124, 106, 255, 0.6), 0 0 40px rgba(255, 106, 220, 0.2);
+      }
+    }
+
+    @keyframes capsuleRing {
+
+      0%,
+      100% {
+        opacity: 0.3;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+      }
+    }
+
+    /* ── RP1 Connection Button ── */
+    .rp1-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      background: linear-gradient(135deg, rgba(74, 158, 255, 0.15), rgba(124, 106, 255, 0.15));
+      border: 1px solid rgba(74, 158, 255, 0.3);
+      color: var(--room-place);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--duration-normal) var(--ease-out);
+      text-decoration: none;
+    }
+
+    .rp1-link:hover {
+      background: linear-gradient(135deg, rgba(74, 158, 255, 0.25), rgba(124, 106, 255, 0.25));
+      box-shadow: 0 0 20px rgba(74, 158, 255, 0.2);
+      transform: translateY(-1px);
+      color: var(--room-accent-bright);
+    }
+
+    /* ── Contribute Modal ── */
+    .contribute-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: var(--z-modal);
+      background: rgba(6, 6, 15, 0.8);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contribute-overlay.open {
+      display: flex;
+      animation: fadeIn 0.3s var(--ease-out);
+    }
+
+    .contribute-modal {
+      width: min(560px, calc(100vw - 40px));
+      max-height: 80vh;
+      overflow-y: auto;
+      background: var(--room-bg-raised);
+      border: 1px solid var(--room-border-bright);
+      border-radius: var(--radius-xl);
+      padding: var(--space-xl);
+      position: relative;
+    }
+
+    .contribute-modal h3 {
+      margin-bottom: var(--space-md);
+      font-size: var(--text-xl);
+    }
+
+    .contribute-modal .form-group {
+      margin-bottom: var(--space-md);
+    }
+
+    .contribute-modal .form-textarea {
+      min-height: 120px;
+      font-family: var(--font-sans);
+      font-size: var(--text-sm);
+    }
+
+    .contribute-close {
+      position: absolute;
+      top: var(--space-md);
+      right: var(--space-md);
+    }
+
+    .contribute-success {
+      text-align: center;
+      padding: var(--space-xl);
+    }
+
+    .contribute-success .success-icon {
+      font-size: 3rem;
+      margin-bottom: var(--space-md);
+    }
+
+    .contribute-success h3 {
+      color: var(--room-artifact);
+    }
+
+    .contribute-success p {
+      color: var(--room-text-dim);
+      margin: var(--space-sm) auto;
+    }
   </style>
 </head>
 
@@ -455,6 +590,8 @@
   <nav class="viewer-nav" id="viewerNav">
     <a href="index.html" class="nav-brand">🌐 <span>ROOM</span></a>
     <div style="display:flex; align-items:center; gap:var(--space-md);">
+      <a href="https://team044.hackathon.rp1.dev" target="_blank" class="rp1-link" title="Open Scene Assembler">🌐 RP1
+        Scene</a>
       <button class="btn btn-sm" id="btnTour" title="Start guided tour">🚶 Tour</button>
       <button class="btn btn-sm" id="btnReset" title="Reset camera">🎯 Reset</button>
       <a href="editor.html" class="btn btn-sm">✏️ Editor</a>
@@ -506,6 +643,60 @@
 
   <!-- Toast -->
   <div class="toast toast-success" id="toast"></div>
+
+  <!-- Contribute Perspective Modal -->
+  <div class="contribute-overlay" id="contributeOverlay">
+    <div class="contribute-modal" id="contributeModal">
+      <button class="btn btn-icon contribute-close" id="contributeClose">✕</button>
+      <div id="contributeForm">
+        <h3>💡 Contribute Perspective</h3>
+        <p style="font-size:var(--text-sm); color:var(--room-text-dim); margin-bottom:var(--space-lg)">
+          Add your perspective to this location. Your insight becomes part of the spatial memory.
+        </p>
+        <div class="form-group">
+          <label class="form-label">Your Perspective Title</label>
+          <input class="form-input" id="contributeLabel" placeholder="e.g., The Innovation Corridor">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Ontology / Lens</label>
+          <select class="form-select" id="contributeOntology">
+            <option value="architectural">🏗️ Architectural</option>
+            <option value="social">🤝 Social</option>
+            <option value="experiential">✨ Experiential</option>
+            <option value="mythological">🛸 Mythological</option>
+            <option value="personal" selected>🔒 Personal</option>
+            <option value="technical">🔧 Technical</option>
+            <option value="bioregional">🌿 Bioregional</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Content</label>
+          <textarea class="form-textarea" id="contributeContent"
+            placeholder="What do you see here? What does this place mean? What happened that the space should remember?"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Visibility</label>
+          <select class="form-select" id="contributeVisibility">
+            <option value="private">🔒 Private (refine first, share when ready)</option>
+            <option value="public">🌐 Public (contribute to shared graph)</option>
+          </select>
+        </div>
+        <div style="display:flex; gap:var(--space-sm); margin-top:var(--space-lg)">
+          <button class="btn" id="contributeCancelBtn" style="flex:1">Cancel</button>
+          <button class="btn btn-primary" id="contributeSubmitBtn" style="flex:1">✨ Add Perspective</button>
+        </div>
+      </div>
+      <div class="contribute-success" id="contributeSuccess" style="display:none">
+        <div class="success-icon">✨</div>
+        <h3>Perspective Added</h3>
+        <p>Your insight is now part of this place's memory.</p>
+        <p style="font-size:var(--text-xs); color:var(--room-text-muted)">In the full system, this would be refined in
+          your local IDE (Claudesidian), then submitted to the collaborative knowledge graph on RP1.</p>
+        <button class="btn btn-primary" id="contributeSuccessClose" style="margin-top:var(--space-lg)">Continue
+          Exploring</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Scripts -->
   <script src="room.js"></script>
@@ -732,7 +923,7 @@
         if (!node.position) return;
 
         const div = document.createElement('div');
-        div.className = `node-marker type-${node.type}`;
+        div.className = `node-marker type-${node.type}${node.capsule ? ' capsule' : ''}`;
         div.innerHTML = `<span>${node.icon || ROOM.NODE_ICONS[node.type]}</span> <span>${node.label}</span>`;
         div.dataset.nodeId = node.id;
         div.dataset.type = node.type;
@@ -881,6 +1072,11 @@
         <h3 class="detail-title">${node.icon || ''} ${node.label}</h3>
         <p class="detail-description">${node.description || ''}</p>
         ${contentHTML}
+        ${node.type === 'place' && node.rp1Scene ? `
+          <a href="${node.rp1Scene}" target="_blank" class="rp1-link" style="margin-bottom:var(--space-md);display:inline-flex">
+            🌐 View in RP1 Scene Assembler ${node.glb ? `(${node.glb})` : ''}
+          </a>
+        ` : ''}
         <div class="detail-meta">
           ${node.time ? `<div class="detail-meta-row"><span>Time</span><span>${new Date(node.time).toLocaleString()}</span></div>` : ''}
           ${node.position ? `<div class="detail-meta-row"><span>Position</span><span>[${node.position.join(', ')}]</span></div>` : ''}
@@ -898,12 +1094,25 @@
             `).join('')}
           </div>
         ` : ''}
+        ${(node.type === 'place' || node.type === 'event') ? `
+          <div style="margin-top:var(--space-lg); padding-top:var(--space-lg); border-top:1px solid var(--room-border)">
+            <button class="btn btn-primary" id="btnContribute" style="width:100%" data-anchor="${node.id}">
+              💡 Contribute Perspective
+            </button>
+          </div>
+        ` : ''}
       `;
 
       // Click handlers for connected nodes
       detail.querySelectorAll('.connected-node').forEach(el => {
         el.addEventListener('click', () => selectNode(el.dataset.nodeId));
       });
+
+      // Contribute button handler
+      const contributeBtn = detail.querySelector('#btnContribute');
+      if (contributeBtn) {
+        contributeBtn.addEventListener('click', () => openContribute(contributeBtn.dataset.anchor));
+      }
 
       // Open sidebar
       document.getElementById('detailSidebar').classList.add('open');
@@ -1087,6 +1296,124 @@
       clearTimeout(toast._timeout);
       toast._timeout = setTimeout(() => toast.classList.remove('show'), 2500);
     }
+
+    /* ═══════════════════════════════════════════
+       Contribute Perspective
+       ═══════════════════════════════════════════ */
+    let contributeAnchor = null;
+
+    function openContribute(anchorNodeId) {
+      contributeAnchor = anchorNodeId;
+      const node = ROOM.getNodeById(anchorNodeId);
+
+      // Reset form
+      document.getElementById('contributeLabel').value = '';
+      document.getElementById('contributeContent').value = '';
+      document.getElementById('contributeOntology').value = 'personal';
+      document.getElementById('contributeVisibility').value = 'private';
+      document.getElementById('contributeForm').style.display = 'block';
+      document.getElementById('contributeSuccess').style.display = 'none';
+
+      document.getElementById('contributeOverlay').classList.add('open');
+    }
+
+    function closeContribute() {
+      document.getElementById('contributeOverlay').classList.remove('open');
+      contributeAnchor = null;
+    }
+
+    function submitContribute() {
+      const label = document.getElementById('contributeLabel').value.trim();
+      const content = document.getElementById('contributeContent').value.trim();
+      const ontology = document.getElementById('contributeOntology').value;
+      const visibility = document.getElementById('contributeVisibility').value;
+
+      if (!label || !content) {
+        showToast('Please fill in both title and content');
+        return;
+      }
+
+      const anchorNode = ROOM.getNodeById(contributeAnchor);
+      if (!anchorNode) return;
+
+      // If anchor is a Place, we need to create/find an event first
+      let eventId;
+      if (anchorNode.type === 'place') {
+        // Create a generic event at this place
+        const event = ROOM.addNode({
+          type: 'event',
+          label: `Observation at ${anchorNode.label}`,
+          description: `A perspective was contributed at ${anchorNode.label}`,
+          place: anchorNode.id,
+          position: anchorNode.position ? [...anchorNode.position] : [0, 5, 0],
+          time: new Date().toISOString(),
+          icon: '💭'
+        });
+        eventId = event.id;
+      } else {
+        eventId = anchorNode.id;
+      }
+
+      // Create perspective node
+      const perspective = ROOM.addNode({
+        type: 'perspective',
+        label,
+        description: `Contributed during the Open Metaverse Hackathon`,
+        event: eventId,
+        ontology,
+        visibility,
+        content,
+        position: anchorNode.position ? [
+          anchorNode.position[0] + (Math.random() - 0.5) * 4,
+          anchorNode.position[1] + 1 + Math.random(),
+          anchorNode.position[2] + (Math.random() - 0.5) * 4
+        ] : [0, 6, 0],
+        icon: visibility === 'private' ? '🔒' : '👁️',
+        _importedFrom: 'room-viewer',
+        _timestamp: new Date().toISOString()
+      });
+
+      // Add marker to scene
+      const markerDiv = document.createElement('div');
+      markerDiv.className = `node-marker type-perspective`;
+      markerDiv.innerHTML = `<span>${perspective.icon}</span> <span>${perspective.label}</span>`;
+      markerDiv.dataset.nodeId = perspective.id;
+      markerDiv.dataset.type = 'perspective';
+      markerDiv.dataset.ontology = ontology;
+      markerDiv.addEventListener('click', (e) => {
+        e.stopPropagation();
+        selectNode(perspective.id);
+      });
+
+      const markerLabel = new CSS2DObject(markerDiv);
+      markerLabel.position.set(
+        perspective.position[0],
+        perspective.position[1] + 2,
+        perspective.position[2]
+      );
+      scene.add(markerLabel);
+      markers.push({ node: perspective, label: markerLabel, div: markerDiv });
+
+      // Show success
+      document.getElementById('contributeForm').style.display = 'none';
+      document.getElementById('contributeSuccess').style.display = 'block';
+
+      showToast(`✨ Perspective "${label}" added to spatial memory`);
+    }
+
+    // Wire up contribute modal events
+    document.getElementById('contributeClose').addEventListener('click', closeContribute);
+    document.getElementById('contributeCancelBtn').addEventListener('click', closeContribute);
+    document.getElementById('contributeSubmitBtn').addEventListener('click', submitContribute);
+    document.getElementById('contributeSuccessClose').addEventListener('click', () => {
+      closeContribute();
+      // Select the newly created perspective
+      const nodes = ROOM.getPerspectives();
+      if (nodes.length > 0) selectNode(nodes[nodes.length - 1].id);
+    });
+    document.getElementById('contributeOverlay').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) closeContribute();
+    });
 
     /* ═══════════════════════════════════════════
        Boot
