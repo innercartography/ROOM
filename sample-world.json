@@ -40,7 +40,7 @@
             "id": "place-alien-lounge",
             "type": "place",
             "label": "The Alien Lounge",
-            "description": "Silver mylar walls, glow-in-the-dark stars, the Arecibo message. A room that takes its own mythology seriously.",
+            "description": "Silver mylar walls, glow-in-the-dark stars, the Arecibo message. Home of alien.org — proving humanity in the age of AI.",
             "position": [
                 0,
                 0,
@@ -242,6 +242,40 @@
             "capsule": true
         },
         {
+            "id": "capsule-alien-network",
+            "type": "perspective",
+            "label": "Alien — Proving Humanity",
+            "description": "AI can replicate humans online with perfect fidelity. Without verifiable proof of humanity, we are aliens until proven human.",
+            "event": "event-alien-discovery",
+            "ontology": "technical",
+            "visibility": "public",
+            "content": "AI can now replicate humans online with perfect fidelity. AI agents are already acting, speaking and transacting on our behalf. Without verifiable proof of humanity, we no longer know who to trust — we are aliens until proven human.\n\nAlien is a fair, decentralized human network:\n- **Alien ID** — Anonymous proof of human uniqueness, powered by the Continuous Human Verification Protocol (CHVP)\n- **Aliencoin** — A fair-launch currency issued exclusively to verified humans\n- **Alien Network** — A highly scalable L1 blockchain built for and entirely owned by humanity\n\nTrust is the new currency. Identity you own, human-only digital spaces, and verifiable AI that you control.",
+            "position": [
+                0,
+                6,
+                122
+            ],
+            "icon": "👽",
+            "capsule": true
+        },
+        {
+            "id": "capsule-token-villages",
+            "type": "perspective",
+            "label": "Tokens in the Spatial Fabric",
+            "description": "Digital villages can use tokens to interoperate within spatial fabrics — identity, reputation, and value flowing between places.",
+            "event": "event-alien-discovery",
+            "ontology": "social",
+            "visibility": "public",
+            "content": "Digital villages don't need walled gardens. They need interoperable trust.\n\nWhen spatial environments run on open standards, tokens become the connective tissue: proof of humanity (Alien ID) gates entry. Reputation tokens let contributions carry weight across communities. Fair-launch currencies (like Aliencoin) let value flow without platform rent-seeking.\n\nIn RP1's spatial fabric, a Parcel could accept Alien ID for access, issue community tokens for participation, and let visitors carry reputation across parcels. The village isn't a platform — it's a network of places that recognize each other's trust primitives.\n\nThis is what interoperability actually means: not just rendering the same 3D model in different browsers, but carrying identity, reputation, and value across spatial boundaries.",
+            "position": [
+                10,
+                4,
+                118
+            ],
+            "icon": "🪙",
+            "capsule": true
+        },
+        {
             "id": "capsule-resonance-lab",
             "type": "perspective",
             "label": "Resonance Lab — Field Notes",
@@ -317,6 +351,21 @@
                 54
             ],
             "icon": "📦"
+        },
+        {
+            "id": "artifact-alien-org",
+            "type": "artifact",
+            "label": "alien.org",
+            "description": "Proving humanity in the age of AI. Decentralized identity and fair-launch human network.",
+            "perspective": "capsule-alien-network",
+            "src": "https://alien.org",
+            "format": "html",
+            "position": [
+                3,
+                8,
+                124
+            ],
+            "icon": "👽"
         }
     ],
     "edges": [
@@ -386,6 +435,16 @@
             "type": "observes"
         },
         {
+            "source": "capsule-alien-network",
+            "target": "event-alien-discovery",
+            "type": "observes"
+        },
+        {
+            "source": "capsule-token-villages",
+            "target": "event-alien-discovery",
+            "type": "observes"
+        },
+        {
             "source": "artifact-room-hyperblog",
             "target": "capsule-places-remember",
             "type": "produced_by"
@@ -403,6 +462,11 @@
         {
             "source": "artifact-world-json",
             "target": "capsule-semantic-layer",
+            "type": "produced_by"
+        },
+        {
+            "source": "artifact-alien-org",
+            "target": "capsule-alien-network",
             "type": "produced_by"
         },
         {
@@ -436,10 +500,16 @@
             "label": "powers"
         },
         {
-            "source": "capsule-digital-villages",
-            "target": "capsule-shards",
+            "source": "capsule-alien-network",
+            "target": "capsule-token-villages",
             "type": "leads_to",
-            "label": "built from"
+            "label": "enables"
+        },
+        {
+            "source": "capsule-token-villages",
+            "target": "capsule-digital-villages",
+            "type": "leads_to",
+            "label": "powers"
         }
     ],
     "tour": {
@@ -485,6 +555,14 @@
             {
                 "node": "capsule-digital-villages",
                 "narration": "This room is a prototype. Digital villages form the way physical ones do — through repeated visits, shared stories, accumulated meaning. Different communities, different ontologies, same space."
+            },
+            {
+                "node": "capsule-alien-network",
+                "narration": "This floor belongs to alien.org. AI can replicate humans with perfect fidelity. Alien ID solves the trust problem — anonymous proof of human uniqueness. We are aliens until proven human."
+            },
+            {
+                "node": "capsule-token-villages",
+                "narration": "Tokens become the connective tissue of spatial villages. Alien ID for access. Reputation tokens for weight. Fair-launch currencies for value. Identity, trust, and value flowing across spatial boundaries."
             },
             {
                 "node": "capsule-shards",
