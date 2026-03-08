@@ -2,7 +2,7 @@
     "version": "room/v0.1",
     "meta": {
         "title": "Frontier Tower — Open Metaverse Hackathon",
-        "description": "Semantic memory of the first Open Metaverse Hackathon, March 7-8 2026, Frontier Tower, San Francisco. Four spatial captures, multiple ontological perspectives, one shared memory.",
+        "description": "Spatial memory of the first Open Metaverse Hackathon, March 7-8 2026. Knowledge capsules from omb.wiki, Resonance Lab, and the ROOM hyperblog — spatialized.",
         "created": "2026-03-07T09:00:00-08:00",
         "schema": "https://github.com/innercartography/ROOM",
         "track": "PLACES"
@@ -12,7 +12,7 @@
             "id": "place-lobby",
             "type": "place",
             "label": "Frontier Tower — Lobby & Entrance",
-            "description": "The street-level approach and lobby of Frontier Tower at 995 Market St. The threshold between the street and the spatial internet.",
+            "description": "The street-level threshold at 995 Market St. Where the spatial internet begins.",
             "position": [
                 0,
                 0,
@@ -26,11 +26,11 @@
             "id": "place-16th-floor",
             "type": "place",
             "label": "16th Floor — Hackathon Space",
-            "description": "Where builders gather. Desks, screens, whiteboards, and the hum of creation. The primary action space of the Open Metaverse Hackathon.",
+            "description": "Where builders gather. The primary action space of the Open Metaverse Hackathon.",
             "position": [
                 0,
                 16,
-                50
+                100
             ],
             "glb": "3_7_2026_final.glb",
             "rp1Scene": "https://enter.rp1.com/?start_cid=553&lat=-18.162044841382034&lon=-168.73454053422424&rad=6371000",
@@ -40,384 +40,293 @@
             "id": "place-alien-lounge",
             "type": "place",
             "label": "The Alien Lounge",
-            "description": "A themed room hidden within the building. The secret bonus level. 🛸",
+            "description": "Silver mylar walls, glow-in-the-dark stars, the Arecibo message. A room that takes its own mythology seriously.",
             "position": [
-                20,
-                16,
-                70
+                50,
+                2,
+                50
             ],
-            "glb": "",
-            "rp1Scene": "https://enter.rp1.com/?start_cid=553&lat=-18.162044841382034&lon=-168.73454053422424&rad=6371000",
-            "icon": "🛸",
-            "secret": true
+            "secret": true,
+            "icon": "🛸"
         },
         {
-            "id": "event-registration",
+            "id": "event-arrival",
             "type": "event",
-            "label": "Registration & Breakfast",
-            "description": "Check-in, networking, review tracks. Light breakfast and coffee. The calm before the build.",
+            "label": "Arrival at Frontier Tower",
+            "description": "March 7th, 2026. Walking into 995 Market St for the first Open Metaverse Hackathon.",
             "place": "place-lobby",
             "position": [
+                2,
                 1,
-                1,
-                51
+                3
+            ],
+            "time": "2026-03-07T09:00:00-08:00",
+            "icon": "🚶"
+        },
+        {
+            "id": "event-hackathon",
+            "type": "event",
+            "label": "The Build — 48 Hours",
+            "description": "Building ROOM at the intersection of Tools, Places, and AI tracks. Proving that places can hold memory.",
+            "place": "place-16th-floor",
+            "position": [
+                3,
+                17,
+                101
             ],
             "time": "2026-03-07T10:00:00-08:00",
-            "icon": "☕"
-        },
-        {
-            "id": "event-opening",
-            "type": "event",
-            "label": "Kickoff & Opening Remarks",
-            "description": "Sean Mann (Co-Founder & CEO, RP1) and Dean Robertson (Co-Founder & Chief Architect, RP1) introduce the vision. Open standards, open fabrics, open future.",
-            "place": "place-16th-floor",
-            "position": [
-                2,
-                6,
-                102
-            ],
-            "time": "2026-03-07T12:00:00-08:00",
-            "icon": "🎤"
-        },
-        {
-            "id": "event-workshop-vcn",
-            "type": "event",
-            "label": "Workshop: AI & Vibe Coding",
-            "description": "Using Claude & Gemini to accelerate spatial development. Live coding demo with VCN.",
-            "place": "place-16th-floor",
-            "position": [
-                -5,
-                5.5,
-                97
-            ],
-            "time": "2026-03-07T13:30:00-08:00",
-            "icon": "🤖"
-        },
-        {
-            "id": "event-workshop-manifolder",
-            "type": "event",
-            "label": "Workshop: Manifolder & MCP",
-            "description": "Patched Reality demonstrates Manifolder — connecting AI Agents to browse, edit, and connect scenes and servers across fabrics using MCP.",
-            "place": "place-16th-floor",
-            "position": [
-                -3,
-                5.5,
-                103
-            ],
-            "time": "2026-03-07T15:30:00-08:00",
-            "icon": "🔗"
-        },
-        {
-            "id": "event-first-splat",
-            "type": "event",
-            "label": "First Polycam Capture",
-            "description": "The first Gaussian splat of the hackathon space is captured. The building begins to remember.",
-            "place": "place-16th-floor",
-            "position": [
-                -3,
-                5.5,
-                98
-            ],
-            "time": "2026-03-07T15:00:00-08:00",
-            "icon": "📸"
-        },
-        {
-            "id": "event-lightning-talks",
-            "type": "event",
-            "label": "Lightning Talks",
-            "description": "3-4 rapid 10-min talks: Common pitfalls, debugging tips, deployment strategies for spatial apps.",
-            "place": "place-16th-floor",
-            "position": [
-                4,
-                6,
-                99
-            ],
-            "time": "2026-03-07T20:00:00-08:00",
-            "icon": "⚡"
-        },
-        {
-            "id": "event-ufo-discovery",
-            "type": "event",
-            "label": "UFO Room Discovery",
-            "description": "Someone finds the hidden UFO-themed room. The secret level is unlocked.",
-            "place": "place-alien-lounge",
-            "position": [
-                21,
-                5.5,
-                121
-            ],
-            "time": "2026-03-07T14:00:00-08:00",
-            "icon": "👽"
-        },
-        {
-            "id": "event-code-complete",
-            "type": "event",
-            "label": "🚩 Code Complete",
-            "description": "4:00 PM Sunday. Keyboards down. No more coding. Deploy and prepare for judging.",
-            "place": "place-16th-floor",
-            "position": [
-                0,
-                7,
-                100
-            ],
-            "time": "2026-03-08T16:00:00-08:00",
-            "icon": "🏁"
+            "icon": "🔨"
         },
         {
             "id": "event-demo-day",
             "type": "event",
-            "label": "Judging & Demo Showcase",
-            "description": "Teams demo at stations: 3 min demo + 2 min Q&A. Judges rotate through floors evaluating all projects. Categories: Best Tools, Best Places, Best AI, Best Overall, People's Choice.",
+            "label": "Demo Day",
+            "description": "Sunday afternoon. The spatial internet has memory now.",
             "place": "place-16th-floor",
             "position": [
-                0,
-                6,
-                105
+                -3,
+                17,
+                99
             ],
-            "time": "2026-03-08T16:00:00-08:00",
-            "icon": "🏆"
+            "time": "2026-03-08T14:00:00-08:00",
+            "icon": "🎤"
         },
         {
-            "id": "event-awards",
+            "id": "event-alien-discovery",
             "type": "event",
-            "label": "Awards Ceremony",
-            "description": "Winners announced. Best Tools, Best Places, Best AI, Best Overall, People's Choice. Then the GDC Spatial XR Mixer kicks off.",
-            "place": "place-16th-floor",
+            "label": "Discovering the Lounge",
+            "description": "A break from building. Down the elevator, through a door, into another world entirely.",
+            "place": "place-alien-lounge",
             "position": [
+                51,
                 3,
-                7,
-                104
+                51
             ],
-            "time": "2026-03-08T17:00:00-08:00",
-            "icon": "🎖️"
+            "time": "2026-03-07T22:00:00-08:00",
+            "icon": "🔍"
         },
         {
-            "id": "event-window-insight",
-            "type": "event",
-            "label": "The Window Moment",
-            "description": "An RP1 founder gestures toward the floor-to-ceiling glass and delivers the thesis: all of real estate will need to spatialize. The window becomes a symbol.",
-            "place": "place-16th-floor",
-            "position": [
-                8,
-                6,
-                100
-            ],
-            "time": "2026-03-07T12:15:00-08:00",
-            "icon": "🪟"
-        },
-        {
-            "id": "perspective-architectural",
+            "id": "capsule-collective-hippocampus",
             "type": "perspective",
-            "label": "Built Environment",
-            "description": "The building through the lens of architectural analysis.",
-            "event": "event-opening",
-            "ontology": "architectural",
+            "label": "The Collective Hippocampus",
+            "description": "If the hippocampus lets an individual navigate remembered space, ROOM builds that architecture at collective scale.",
+            "event": "event-hackathon",
+            "ontology": "technical",
             "visibility": "public",
-            "content": "Frontier Tower's 2nd floor is a post-industrial open plan — exposed ductwork, polished concrete, floor-to-ceiling glass on the south wall. The space was designed for flexible use, which is why it works for a hackathon: no fixed walls, modular furniture, excellent natural light. The ceiling height (~4.2m) creates a sense of openness rare in SF commercial real estate.",
+            "content": "Your brain has dedicated architecture for spatial memory. Place cells fire when you're *here*. Grid cells create abstract coordinate systems. ROOM takes this biological principle seriously.\n\nBy anchoring knowledge to spatial coordinates, we're not just making data spatially accessible — we're making it neurologically compatible with how humans actually remember.\n\nROOM reduces spatial memory to four atomic types:\n- **Place** — where it happened\n- **Event** — what happened\n- **Perspective** — what it meant\n- **Artifact** — what it produced\n\nNavigation through ROOM becomes epistemic archaeology: walking through space is walking through time, through perspective, through sedimentary layers of collective understanding.",
             "position": [
-                5,
-                7,
-                101
+                -5,
+                18,
+                102
             ],
-            "icon": "🏗️"
-        },
-        {
-            "id": "perspective-spatial-real-estate",
-            "type": "perspective",
-            "label": "The Spatialization Thesis",
-            "description": "The RP1 founder's insight about the future of real estate, anchored at the window.",
-            "event": "event-window-insight",
-            "ontology": "architectural",
-            "visibility": "public",
-            "content": "'Look out the window. All of real estate will need to spatialize over the next two to three years.'\n\nThis wasn't marketing. Standing at 995 Market St, looking out at the San Francisco skyline, the founder was stating something structural: every building, every storefront, every room will eventually have a spatial twin. Not as a novelty — as infrastructure.\n\nThe window itself becomes the metaphor. You look through glass at the physical city and see the future: the same city, spatially indexed, semantically tagged, collaboratively annotated. ROOM doesn't just remember what was said here. It gives the window itself a memory — this is where the thesis was spoken.",
-            "position": [
-                9,
-                7,
-                100
-            ],
-            "icon": "🪟",
+            "icon": "🧠",
             "capsule": true
         },
         {
-            "id": "perspective-social",
+            "id": "capsule-spatial-fabric",
             "type": "perspective",
-            "label": "Community Gathering",
-            "description": "The hackathon as a social phenomenon.",
-            "event": "event-opening",
-            "ontology": "social",
-            "visibility": "public",
-            "content": "Over a hundred builders, artists, and thinkers gathered — drawn not by a product launch but by a shared conviction that the spatial internet should be open. The Khronos Group and Metaverse Standards Forum sponsored. RP1's Sean Mann spoke about infrastructure, not platforms. The energy was collaborative, not competitive.",
-            "position": [
-                6,
-                6.5,
-                103
-            ],
-            "icon": "🤝"
-        },
-        {
-            "id": "perspective-experiential",
-            "type": "perspective",
-            "label": "First-Person Experience",
-            "description": "What it felt like to be there.",
-            "event": "event-first-splat",
-            "ontology": "experiential",
-            "visibility": "public",
-            "content": "The Polycam scan took maybe thirty seconds. But watching the point cloud assemble on screen — seeing the room I was standing in become a digital twin in real time — something shifted. The room didn't just look like the room. It *was* the room, or at least a memory of it. That's when the ROOM concept stopped being abstract. Places can remember.",
-            "position": [
-                -5,
-                6.5,
-                99
-            ],
-            "icon": "✨"
-        },
-        {
-            "id": "perspective-ufo-lore",
-            "type": "perspective",
-            "label": "UFO Lore",
-            "description": "The UFO room through the lens of extraterrestrial mythology.",
-            "event": "event-ufo-discovery",
-            "ontology": "mythological",
-            "visibility": "public",
-            "content": "Silver mylar, string lights in concentric circles, a central 'landing pad' from an old conference table. The Arecibo message taped to the wall. Glow-in-the-dark stars on the ceiling. Kitschy and earnest and perfect — a space that took its own absurdity seriously. In ROOM terms, this is what happens when a place accumulates lore: the physical space becomes a substrate for imagination.",
-            "position": [
-                22,
-                6.5,
-                122
-            ],
-            "icon": "🛸"
-        },
-        {
-            "id": "perspective-workshop-spatial",
-            "type": "perspective",
-            "label": "Spatial Dev Tools",
-            "description": "The Manifolder workshop through the lens of developer tooling.",
-            "event": "event-workshop-manifolder",
+            "label": "The Spatial Fabric",
+            "description": "RP1's three-tier map of the metaverse: Celestial → Terrestrial → Physical. DNS for space.",
+            "event": "event-hackathon",
             "ontology": "technical",
             "visibility": "public",
-            "content": "Patched Reality's Manifolder is an MCP server for spatial scenes — you can point Claude or Cursor at it to browse, edit, and connect scenes across fabrics. During the workshop, they showed live editing of a spatial fabric through natural language. The implications: AI agents that understand 3D space as a first-class data structure, not just text.",
+            "content": "The Metaverse Spatial Fabric (MSF) is the map of the metaverse. Unlike bounded game engines (~10km), RP1's map spans hundreds of millions of light years.\n\n**Three Tiers:**\n1. **Celestial** — Galaxies, star systems, planets\n2. **Terrestrial** — Root → Land → Country → State → City → Parcel\n3. **Physical** — GLB objects, Gaussian splats, avatars\n\nThe browser doesn't download the map. It queries a Map Service for objects near the user's position — like DNS for space.",
             "position": [
-                -4,
-                6.5,
-                104
+                5,
+                18,
+                98
             ],
-            "icon": "🔧"
+            "icon": "🌐",
+            "capsule": true
         },
         {
-            "id": "perspective-personal-pkg",
+            "id": "capsule-places-remember",
             "type": "perspective",
-            "label": "Personal Knowledge Graph",
-            "description": "A private annotation from a Claudesidian vault.",
-            "event": "event-demo-day",
-            "ontology": "personal",
-            "visibility": "private",
-            "content": "# Demo Day Reflections\n\nThe ROOM prototype worked. When I showed perspective-switching between the architectural and experiential views of the same space, I saw people lean forward. That's the tell.\n\n## Key Insight\nThe spatial internet doesn't need better rendering. It needs better memory.\n\n## Next Steps\n- [ ] Integrate with RP1 Fabric\n- [ ] Add video overlays\n- [ ] Build community onboarding flow",
-            "src": "claudesidian://01_Projects/ROOM/demo-day-reflections.md",
+            "label": "Places Can Remember",
+            "description": "The web gave us pages. The spatial internet will give us places — where knowledge inhabits rather than sits on surfaces.",
+            "event": "event-hackathon",
+            "ontology": "experiential",
+            "visibility": "public",
+            "content": "The web gave us pages — flat surfaces covered in text, linked by addresses. The spatial internet will give us places — volumetric environments where knowledge doesn't sit on surfaces, it inhabits them.\n\nROOM explores what happens when a place doesn't just look like somewhere — when it remembers what happened there, holds the perspectives of everyone who passed through, and offers that memory to anyone willing to walk in.\n\nThis is the core thesis: spatial memory as infrastructure.",
             "position": [
-                2,
-                7,
-                106
+                0,
+                19,
+                103
             ],
-            "icon": "🔒"
+            "icon": "🏛️",
+            "capsule": true
         },
         {
-            "id": "artifact-splat-exterior",
-            "type": "artifact",
-            "label": "Exterior Gaussian Splat",
-            "description": "Polycam capture of Frontier Tower's street-level facade.",
-            "perspective": "perspective-architectural",
-            "src": "splats/ft-exterior.ply",
-            "format": "ply",
+            "id": "capsule-open-standards",
+            "type": "perspective",
+            "label": "Open Standards — No Walled Gardens",
+            "description": "The metaverse will either be built like the web — by many, for many — or locked into proprietary systems.",
+            "event": "event-hackathon",
+            "ontology": "technical",
+            "visibility": "public",
+            "content": "Five non-negotiables from the Open Metaverse:\n1. **Interoperability** — No software lock-in\n2. **No Device Lock-In** — Phones, AR glasses, VR, desktops\n3. **Ownership** — You own your data, content, identity\n4. **Frictionless Access** — Browse to enter. No app downloads.\n5. **Open Tooling** — Creator ecosystem, not a closed platform\n\nAOL built a walled garden. Netscape and open HTTP won. The same pattern applies to spatial computing.",
             "position": [
                 7,
-                8,
+                17,
+                103
+            ],
+            "icon": "📜",
+            "capsule": true
+        },
+        {
+            "id": "capsule-semantic-layer",
+            "type": "perspective",
+            "label": "The Missing Semantic Layer",
+            "description": "Most spatial tooling solves rendering, not meaning. The semantic layer is almost entirely missing from the open stack.",
+            "event": "event-hackathon",
+            "ontology": "technical",
+            "visibility": "public",
+            "content": "Spatial information organizes into four ascending layers. Most tooling today operates on layers 2–4: rendering, networking, interaction. The semantic layer — what makes geometry into meaning — is almost entirely absent.\n\nWithout semantics, every layer above remains mute. Geometry without semantics is topography without territory. A photorealistic render has no way to declare what it depicts, who was there, what it meant.\n\nROOM provides the primitives that let the other layers speak. That's the gap this project fills.",
+            "position": [
+                -6,
+                17,
+                98
+            ],
+            "icon": "📐",
+            "capsule": true
+        },
+        {
+            "id": "capsule-knowledge-sovereignty",
+            "type": "perspective",
+            "label": "Knowledge Sovereignty",
+            "description": "Your thinking remains yours. You choose what surfaces, and how.",
+            "event": "event-hackathon",
+            "ontology": "personal",
+            "visibility": "public",
+            "content": "Shared memory systems have historically demanded a sacrifice: your private cognition becomes the property of the platform. ROOM refuses this bargain.\n\n**Three visibility levels:**\n- `private` — Local only. Encrypted at rest. No network exposure.\n- `shared` — Visible to invited participants. Permission-gated.\n- `public` — Open. Verifiable. Indexed by the spatial internet.\n\nYour thinking remains yours. The graph is federated — no central authority controls what gets remembered or how perspectives get weighted.",
+            "position": [
+                6,
+                19,
                 100
             ],
-            "icon": "🗂️"
+            "icon": "🔒",
+            "capsule": true
         },
         {
-            "id": "artifact-group-photo",
-            "type": "artifact",
-            "label": "Hackathon Group Photo",
-            "description": "The traditional group photo. Everyone who stayed until the end.",
-            "perspective": "perspective-social",
-            "src": "photos/group-photo.jpg",
-            "format": "image",
+            "id": "capsule-digital-villages",
+            "type": "perspective",
+            "label": "Digital Villages",
+            "description": "Communities forming around shared spatial memory. Not platforms — villages.",
+            "event": "event-alien-discovery",
+            "ontology": "social",
+            "visibility": "public",
+            "content": "The Alien Lounge isn't just a weird room. It's a prototype of something important: a space that accumulates lore. Myths, inside jokes, ritual significance — the things that turn a location into a place.\n\nDigital villages form the same way physical ones do: through repeated visits, shared stories, accumulated meaning. The spatial internet needs infrastructure for this — not just rendering, but remembering.\n\nROOM's ontology system lets different communities bring different schemas. The architectural view of this room is just walls and mylar. The mythological view is an alien transmission station. Both are valid. Both coexist.",
             "position": [
-                8,
-                7.5,
+                52,
+                3,
+                49
+            ],
+            "icon": "🏘️",
+            "capsule": true
+        },
+        {
+            "id": "capsule-shards",
+            "type": "perspective",
+            "label": "Shards of Memory",
+            "description": "Knowledge doesn't arrive whole. It arrives as fragments — shards that find each other over time.",
+            "event": "event-alien-discovery",
+            "ontology": "experiential",
+            "visibility": "public",
+            "content": "A perspective contributed to ROOM isn't a finished thought. It's a shard — an incomplete piece of understanding that gains context from proximity to other shards.\n\nThis is how actual memory works. You don't remember events as complete narratives. You remember fragments: a sound, a face, a feeling about the light. Your hippocampus weaves them together when you revisit the place.\n\nROOM's refinement pipeline mirrors this: capture raw → structure → refine → cross-reference → discover connections you didn't know existed. Knowledge becomes emergent rather than authored.",
+            "position": [
+                49,
+                4,
+                52
+            ],
+            "icon": "🔮",
+            "capsule": true
+        },
+        {
+            "id": "capsule-resonance-lab",
+            "type": "perspective",
+            "label": "Resonance Lab — Field Notes",
+            "description": "Three builders at the edge of spatial computing, personal AI, and collective knowledge. A field note from the hackathon floor.",
+            "event": "event-hackathon",
+            "ontology": "social",
+            "visibility": "public",
+            "content": "Resonance Lab is a loose collaboration between three builders working at the edges of spatial computing, personal AI, and collective knowledge. Not a finished plan — a shared sense that something important was converging.\n\nWhat the hackathon clarified: spatial environments are proximity-based service delivery systems. RP1 isn't building a virtual world; it's building a browser. Services register into a shared coordinate system and activate when you're near them.\n\nBret explores AI carrying personal identity over time. Joshua builds infrastructure for collective memory. Mike asks whether alignment between people can be made visible before they've found each other.\n\nMost details are still unresolved. The most interesting discoveries are probably the ones that surprise all of us.",
+            "position": [
+                -4,
+                18,
+                99
+            ],
+            "icon": "🔬",
+            "capsule": true
+        },
+        {
+            "id": "artifact-room-hyperblog",
+            "type": "artifact",
+            "label": "ROOM Hyperblog",
+            "description": "The living document explaining ROOM's thesis, architecture, and vision.",
+            "perspective": "capsule-places-remember",
+            "src": "https://innercartography.github.io/roomhyperblog/",
+            "format": "html",
+            "position": [
+                1,
+                20,
                 104
             ],
-            "icon": "📷"
+            "icon": "📝"
         },
         {
-            "id": "artifact-arecibo-printout",
+            "id": "artifact-resonance-ep02",
             "type": "artifact",
-            "label": "Arecibo Message Printout",
-            "description": "Someone printed the Arecibo message and taped it to the UFO room wall.",
-            "perspective": "perspective-ufo-lore",
-            "src": "photos/arecibo-wall.jpg",
-            "format": "image",
+            "label": "Resonance Lab — Episode 02",
+            "description": "Field notes from the hackathon floor. Where Bonfires meets ROOM.",
+            "perspective": "capsule-resonance-lab",
+            "src": "https://innercartography.github.io/resonance-labs/",
+            "format": "html",
             "position": [
-                23,
-                7,
-                123
+                -5,
+                19,
+                100
             ],
             "icon": "📡"
         },
         {
-            "id": "artifact-room-worldjson",
+            "id": "artifact-omb-wiki",
             "type": "artifact",
-            "label": "ROOM world.json Schema",
-            "description": "The data format itself is an artifact — a crystallized output of the ROOM project. Flat JSON, no build step, portable across instances.",
-            "perspective": "perspective-workshop-spatial",
-            "src": "world.json",
+            "label": "Open Metaverse Wiki",
+            "description": "Community wiki for open metaverse browser standards and protocols.",
+            "perspective": "capsule-spatial-fabric",
+            "src": "https://omb.wiki",
+            "format": "html",
+            "position": [
+                6,
+                19,
+                97
+            ],
+            "icon": "📚"
+        },
+        {
+            "id": "artifact-world-json",
+            "type": "artifact",
+            "label": "world.json — The Data Format",
+            "description": "A flat, portable JSON graph — human-readable, no build step, compatible with any spatial browser.",
+            "perspective": "capsule-semantic-layer",
+            "src": "https://github.com/innercartography/ROOM",
             "format": "json",
             "position": [
-                -6,
-                7.5,
-                105
+                -7,
+                18,
+                97
             ],
-            "icon": "📋"
+            "icon": "📦"
         }
     ],
     "edges": [
         {
-            "source": "event-registration",
+            "source": "event-arrival",
             "target": "place-lobby",
             "type": "anchored_at"
         },
         {
-            "source": "event-opening",
-            "target": "place-16th-floor",
-            "type": "anchored_at"
-        },
-        {
-            "source": "event-workshop-vcn",
-            "target": "place-16th-floor",
-            "type": "anchored_at"
-        },
-        {
-            "source": "event-workshop-manifolder",
-            "target": "place-16th-floor",
-            "type": "anchored_at"
-        },
-        {
-            "source": "event-first-splat",
-            "target": "place-16th-floor",
-            "type": "anchored_at"
-        },
-        {
-            "source": "event-lightning-talks",
-            "target": "place-16th-floor",
-            "type": "anchored_at"
-        },
-        {
-            "source": "event-ufo-discovery",
-            "target": "place-alien-lounge",
-            "type": "anchored_at"
-        },
-        {
-            "source": "event-code-complete",
+            "source": "event-hackathon",
             "target": "place-16th-floor",
             "type": "anchored_at"
         },
@@ -427,129 +336,163 @@
             "type": "anchored_at"
         },
         {
-            "source": "event-awards",
-            "target": "place-16th-floor",
+            "source": "event-alien-discovery",
+            "target": "place-alien-lounge",
             "type": "anchored_at"
         },
         {
-            "source": "perspective-architectural",
-            "target": "event-opening",
+            "source": "capsule-collective-hippocampus",
+            "target": "event-hackathon",
             "type": "observes"
         },
         {
-            "source": "perspective-social",
-            "target": "event-opening",
+            "source": "capsule-spatial-fabric",
+            "target": "event-hackathon",
             "type": "observes"
         },
         {
-            "source": "perspective-experiential",
-            "target": "event-first-splat",
+            "source": "capsule-places-remember",
+            "target": "event-hackathon",
             "type": "observes"
         },
         {
-            "source": "perspective-ufo-lore",
-            "target": "event-ufo-discovery",
+            "source": "capsule-open-standards",
+            "target": "event-hackathon",
             "type": "observes"
         },
         {
-            "source": "perspective-workshop-spatial",
-            "target": "event-workshop-manifolder",
+            "source": "capsule-semantic-layer",
+            "target": "event-hackathon",
             "type": "observes"
         },
         {
-            "source": "perspective-personal-pkg",
-            "target": "event-demo-day",
+            "source": "capsule-knowledge-sovereignty",
+            "target": "event-hackathon",
             "type": "observes"
         },
         {
-            "source": "artifact-splat-exterior",
-            "target": "perspective-architectural",
+            "source": "capsule-resonance-lab",
+            "target": "event-hackathon",
+            "type": "observes"
+        },
+        {
+            "source": "capsule-digital-villages",
+            "target": "event-alien-discovery",
+            "type": "observes"
+        },
+        {
+            "source": "capsule-shards",
+            "target": "event-alien-discovery",
+            "type": "observes"
+        },
+        {
+            "source": "artifact-room-hyperblog",
+            "target": "capsule-places-remember",
             "type": "produced_by"
         },
         {
-            "source": "artifact-group-photo",
-            "target": "perspective-social",
+            "source": "artifact-resonance-ep02",
+            "target": "capsule-resonance-lab",
             "type": "produced_by"
         },
         {
-            "source": "artifact-arecibo-printout",
-            "target": "perspective-ufo-lore",
+            "source": "artifact-omb-wiki",
+            "target": "capsule-spatial-fabric",
             "type": "produced_by"
         },
         {
-            "source": "artifact-room-worldjson",
-            "target": "perspective-workshop-spatial",
+            "source": "artifact-world-json",
+            "target": "capsule-semantic-layer",
             "type": "produced_by"
-        },
-        {
-            "source": "event-window-insight",
-            "target": "place-16th-floor",
-            "type": "anchored_at"
-        },
-        {
-            "source": "perspective-spatial-real-estate",
-            "target": "event-window-insight",
-            "type": "observes"
         },
         {
             "source": "place-lobby",
             "target": "place-16th-floor",
-            "type": "leads_to"
+            "type": "leads_to",
+            "label": "⬆️ Up to 16th Floor"
         },
         {
             "source": "place-16th-floor",
             "target": "place-alien-lounge",
             "type": "leads_to",
-            "label": "🔍 Secret Passage"
+            "label": "⬇️ Down to 2nd Floor"
+        },
+        {
+            "source": "capsule-collective-hippocampus",
+            "target": "capsule-places-remember",
+            "type": "leads_to",
+            "label": "enables"
+        },
+        {
+            "source": "capsule-spatial-fabric",
+            "target": "capsule-open-standards",
+            "type": "leads_to",
+            "label": "requires"
+        },
+        {
+            "source": "capsule-semantic-layer",
+            "target": "capsule-collective-hippocampus",
+            "type": "leads_to",
+            "label": "powers"
+        },
+        {
+            "source": "capsule-digital-villages",
+            "target": "capsule-shards",
+            "type": "leads_to",
+            "label": "built from"
         }
     ],
     "tour": {
-        "title": "A Walk Through the First Open Metaverse Hackathon",
-        "description": "Follow the thread of spatial memory from the street to the secret room. Each stop holds multiple perspectives — switch between them to see the same place through different eyes.",
+        "title": "Frontier Tower — Walking Through Spatial Memory",
+        "narration_voice": "thoughtful, present-tense, architectural",
         "waypoints": [
             {
                 "node": "place-lobby",
-                "narration": "You're standing in the lobby of Frontier Tower, 995 Market St, San Francisco. March 7th, 2026. The first Open Metaverse Hackathon is about to begin. Take the elevator up."
+                "narration": "You're standing in the lobby of Frontier Tower, 995 Market St. March 7th, 2026. The first Open Metaverse Hackathon starts upstairs. This building is about to become a place that remembers."
             },
             {
-                "node": "event-opening",
-                "narration": "The 16th floor. Sean Mann is at the mic. 'The metaverse should be open, interoperable, and accessible — like the early web.' The room nods. Building begins."
+                "node": "event-arrival",
+                "narration": "The threshold. Past this point, every conversation, every insight, every late-night breakthrough gets captured — not as surveillance, but as spatial memory. The building becomes a collective hippocampus."
             },
             {
-                "node": "event-workshop-manifolder",
-                "narration": "Patched Reality demos Manifolder — an MCP server that lets AI agents edit spatial scenes through natural language. The future of spatial dev tooling, live on stage."
+                "node": "place-16th-floor",
+                "narration": "16th floor. The hackathon space. Desks, screens, the hum of builders. This is where ROOM came alive — proving that the semantic layer is the missing piece of the open metaverse stack."
             },
             {
-                "node": "event-first-splat",
-                "narration": "Someone pulls out Polycam and scans the room. In thirty seconds, the space has a digital memory. ROOM's first Place node is born."
+                "node": "capsule-spatial-fabric",
+                "narration": "The spatial fabric: RP1's three-tier map system. Celestial, Terrestrial, Physical. Every building in the skyline will eventually have a Parcel. DNS for physical space."
             },
             {
-                "node": "perspective-spatial-real-estate",
-                "narration": "The window. An RP1 founder looks out at the San Francisco skyline and says: 'All of real estate will need to spatialize.' The window remembers. This is ROOM's core thesis — places hold memory, and that memory can be refined."
+                "node": "capsule-collective-hippocampus",
+                "narration": "Place cells. Grid cells. Your brain has dedicated architecture for spatial memory. ROOM mirrors it: four atomic types — Place, Event, Perspective, Artifact. Walking through space is walking through time."
             },
             {
-                "node": "perspective-architectural",
-                "narration": "Switch perspective. See the same room through an architect's eyes — structure, materials, spatial relationships. The building has its own story."
+                "node": "capsule-semantic-layer",
+                "narration": "Most spatial tooling solves rendering. ROOM solves meaning. Geometry without semantics is topography without territory. The semantic layer lets every other layer speak."
             },
             {
-                "node": "perspective-social",
-                "narration": "Switch again. Community lens — who came, why they came, connections made. The building doesn't just have walls. It has witnesses."
+                "node": "capsule-places-remember",
+                "narration": "The web gave us pages. The spatial internet gives us places. Knowledge doesn't sit on surfaces here — it inhabits them. This is what we built."
             },
             {
-                "node": "event-ufo-discovery",
-                "narration": "Someone found it. The hidden room. The Alien Lounge. 🛸"
+                "node": "capsule-knowledge-sovereignty",
+                "narration": "One more thing. Your thinking stays yours. Private, shared, or public — you choose. No platform owns what you remember. The graph is federated."
             },
             {
-                "node": "perspective-ufo-lore",
-                "narration": "Silver mylar, glow-in-the-dark stars, the Arecibo message on the wall. A room that takes its own absurdity seriously. Places accumulate lore."
+                "node": "place-alien-lounge",
+                "narration": "Down the elevator. Through a door. Silver mylar, glow-in-the-dark stars, the Arecibo message on the wall. The Alien Lounge. A place that takes its own mythology seriously."
+            },
+            {
+                "node": "capsule-digital-villages",
+                "narration": "This room is a prototype. Digital villages form the way physical ones do — through repeated visits, shared stories, accumulated meaning. Different communities, different ontologies, same space."
+            },
+            {
+                "node": "capsule-shards",
+                "narration": "Knowledge arrives as fragments. Shards of memory that find each other over time. ROOM's pipeline mirrors this: capture, structure, refine, cross-reference, discover."
             },
             {
                 "node": "event-demo-day",
                 "narration": "Sunday afternoon. Demo day. The spatial internet has memory now. Places can remember. And you just walked through the proof."
-            },
-            {
-                "node": "event-awards",
-                "narration": "Best Tools. Best Places. Best AI. Best Overall. People's Choice. The open metaverse has its first champions."
             }
         ]
     }
