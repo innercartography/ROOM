@@ -982,12 +982,12 @@
           <span class="location-icon">${place.icon || '📍'}</span>
           <span class="location-label">${place.label.split('—')[0].trim()}</span>
         `;
-        btn.addEventListener('click', () => flyToPlace(place));
+        btn.addEventListener('click', () => flyToPlace(place, btn));
         bar.appendChild(btn);
       });
     }
 
-    function flyToPlace(place) {
+    function flyToPlace(place, clickedBtn) {
       const pos = place.position || [0, 0, 0];
       const targetPos = new THREE.Vector3(pos[0], pos[1], pos[2]);
       const cameraPos = new THREE.Vector3(pos[0] + 15, pos[1] + 10, pos[2] + 15);
@@ -997,7 +997,7 @@
 
       // Update active state
       document.querySelectorAll('.location-btn').forEach(b => b.classList.remove('active'));
-      event.currentTarget.classList.add('active');
+      if (clickedBtn) clickedBtn.classList.add('active');
 
       showToast(`📍 ${place.label}`);
     }
