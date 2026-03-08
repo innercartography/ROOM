@@ -19,7 +19,7 @@
                 0
             ],
             "glb": "Lobby_demo.glb",
-            "rp1Scene": "https://team044.hackathon.rp1.dev",
+            "rp1Scene": "https://enter.rp1.com/?start_cid=553&lat=-18.162044841382034&lon=-168.73454053422424&rad=6371000",
             "icon": "🚪"
         },
         {
@@ -33,7 +33,7 @@
                 50
             ],
             "glb": "3_7_2026_final.glb",
-            "rp1Scene": "https://team044.hackathon.rp1.dev",
+            "rp1Scene": "https://enter.rp1.com/?start_cid=553&lat=-18.162044841382034&lon=-168.73454053422424&rad=6371000",
             "icon": "⚡"
         },
         {
@@ -47,7 +47,7 @@
                 70
             ],
             "glb": "",
-            "rp1Scene": "https://team044.hackathon.rp1.dev",
+            "rp1Scene": "https://enter.rp1.com/?start_cid=553&lat=-18.162044841382034&lon=-168.73454053422424&rad=6371000",
             "icon": "🛸",
             "secret": true
         },
