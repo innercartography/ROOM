@@ -94,6 +94,113 @@
             z-index: 5;
         }
 
+        .graph-toolbar .btn-sm.active {
+            background: var(--room-accent);
+            color: #fff;
+        }
+
+        /* ── Shift-drag temp line ── */
+        .connect-line {
+            stroke: var(--room-accent-bright);
+            stroke-width: 2;
+            stroke-dasharray: 6 4;
+            fill: none;
+            pointer-events: none;
+        }
+
+        /* ── Edge type picker ── */
+        .edge-picker {
+            position: absolute;
+            background: var(--room-bg-raised);
+            border: 1px solid var(--room-border-bright);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xs);
+            z-index: 20;
+            display: none;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .4);
+            min-width: 160px;
+        }
+
+        .edge-picker.show {
+            display: block;
+            animation: fadeIn 0.15s var(--ease-out);
+        }
+
+        .edge-picker-btn {
+            display: block;
+            width: 100%;
+            padding: var(--space-xs) var(--space-sm);
+            background: transparent;
+            border: none;
+            color: var(--room-text);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            text-align: left;
+            cursor: pointer;
+            border-radius: var(--radius-md);
+            transition: background var(--duration-fast);
+        }
+
+        .edge-picker-btn:hover {
+            background: var(--room-bg-hover);
+        }
+
+        /* ── Node Detail Panel ── */
+        .detail-panel {
+            padding: var(--space-md);
+        }
+
+        .detail-back {
+            background: none;
+            border: none;
+            color: var(--room-accent-bright);
+            font-family: var(--font-sans);
+            font-size: var(--text-sm);
+            cursor: pointer;
+            padding: 0;
+            margin-bottom: var(--space-md);
+        }
+
+        .detail-back:hover {
+            text-decoration: underline;
+        }
+
+        .detail-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+        }
+
+        .detail-icon {
+            font-size: 1.5rem;
+        }
+
+        .detail-type {
+            font-size: var(--text-xs);
+            color: var(--room-text-muted);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .detail-section {
+            margin-bottom: var(--space-md);
+        }
+
+        .detail-section .form-label {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            color: var(--room-text-dim);
+            text-transform: uppercase;
+            margin-bottom: var(--space-xs);
+        }
+
+        .detail-actions {
+            display: flex;
+            gap: var(--space-sm);
+            margin-top: var(--space-md);
+        }
+
         .graph-stats {
             position: absolute;
             bottom: var(--space-md);
@@ -344,11 +451,14 @@
             <div class="graph-toolbar">
                 <button class="btn btn-sm" id="btnZoomFit" title="Fit graph to view">🔍 Fit</button>
                 <button class="btn btn-sm" id="btnRestart" title="Restart simulation">🔄 Reset Layout</button>
+                <button class="btn btn-sm" id="btnConnect" title="Toggle connect mode (or hold Shift)">🔗
+                    Connect</button>
                 <button class="btn btn-sm" id="btnClearStorage" title="Clear saved data and reload defaults"
                     style="margin-left:auto; opacity:0.6">🗑️ Reset Data</button>
             </div>
             <div id="graphCanvas"></div>
             <div class="graph-stats" id="graphStats"></div>
+            <div class="edge-picker" id="edgePicker"></div>
         </div>
 
         <!-- Side panel -->
@@ -362,8 +472,13 @@
 
             <!-- Nodes Panel -->
             <div class="panel-content active" id="panel-nodes">
-                <div class="filter-chips" id="ontologyChips"></div>
-                <div id="nodeList"></div>
+                <!-- List view -->
+                <div id="nodesListView">
+                    <div class="filter-chips" id="ontologyChips"></div>
+                    <div id="nodeList"></div>
+                </div>
+                <!-- Detail/edit view (hidden by default) -->
+                <div id="nodesDetailView" style="display:none"></div>
             </div>
 
             <!-- Add Node Panel -->
@@ -538,6 +653,9 @@ Content goes here…" rows="10" style="margin-top:var(--space-md)"></textarea>
         let selectedNodeId = null;
         let activeOntologies = new Set();
         let graphWidth, graphHeight;
+        let connectMode = false; // true when shift held or connect button toggled
+        let connectSource = null; // d3 datum of source node during edge drag
+        let tempLine = null; // SVG line element for visual feedback
 
         /* ═══════════════════════════════════════════
            Init
@@ -682,6 +800,17 @@ Content goes here…" rows="10" style="margin-top:var(--space-md)"></textarea>
                 .on('click', (event, d) => {
                     event.stopPropagation();
                     selectGraphNode(d.id);
+                })
+                .on('mouseenter', function (event, d) {
+                    // Highlight potential target during connect drag
+                    if (connectSource && connectSource.id !== d.id) {
+                        d3.select(this).select('circle').attr('stroke-width', 3);
+                    }
+                })
+                .on('mouseleave', function (event, d) {
+                    if (connectSource && connectSource.id !== d.id) {
+                        d3.select(this).select('circle').attr('stroke-width', 1.5);
+                    }
                 });
 
             nodeEnter.append('circle')
@@ -718,21 +847,120 @@ Content goes here…" rows="10" style="margin-top:var(--space-md)"></textarea>
             }
         }
 
+        function isConnecting(event) {
+            return connectMode || event.sourceEvent?.shiftKey;
+        }
+
         function dragStart(event, d) {
+            if (isConnecting(event)) {
+                // Start edge-creation drag
+                connectSource = d;
+                const container = document.getElementById('graphCanvas');
+                const svgEl = container.querySelector('svg');
+                tempLine = d3.select(svgEl).select('g')
+                    .append('line')
+                    .attr('class', 'connect-line')
+                    .attr('x1', d.x).attr('y1', d.y)
+                    .attr('x2', d.x).attr('y2', d.y);
+                return;
+            }
             if (!event.active) simulation.alphaTarget(0.3).restart();
             d.fx = d.x;
             d.fy = d.y;
         }
 
         function dragging(event, d) {
+            if (connectSource) {
+                // Update temp line endpoint to follow cursor
+                if (tempLine) {
+                    tempLine.attr('x2', event.x).attr('y2', event.y);
+                }
+                return;
+            }
             d.fx = event.x;
             d.fy = event.y;
         }
 
         function dragEnd(event, d) {
+            if (connectSource) {
+                // Remove temp line
+                if (tempLine) { tempLine.remove(); tempLine = null; }
+                // Check if we dropped on a target node
+                const target = findNodeAtPosition(event.x, event.y, connectSource.id);
+                if (target) {
+                    showEdgePicker(connectSource, target, event.sourceEvent);
+                }
+                connectSource = null;
+                return;
+            }
             if (!event.active) simulation.alphaTarget(0);
+            // Persist the new position
+            const pos = d.position || [0, 0, 0];
+            // Map 2D graph coords back to 3D (keep Y the same)
+            ROOM.updateNode(d._id, { position: [Math.round(d.x / 10), pos[1], Math.round(d.y / 10)] });
+            ROOM.saveToStorage();
             d.fx = null;
             d.fy = null;
+        }
+
+        function findNodeAtPosition(x, y, excludeId) {
+            const world = ROOM.getWorld();
+            if (!world) return null;
+            // Search D3 simulation nodes for one near (x,y)
+            const nodes = simulation.nodes();
+            for (const n of nodes) {
+                if (n.id === excludeId) continue;
+                const dx = n.x - x, dy = n.y - y;
+                const r = n.type === 'place' ? 22 : n.type === 'event' ? 18 : 16;
+                if (dx * dx + dy * dy < r * r * 4) return n;
+            }
+            return null;
+        }
+
+        /* ═══════════════════════════════════════════
+           Edge Picker (appears after shift-drag)
+           ═══════════════════════════════════════════ */
+        function showEdgePicker(sourceNode, targetNode, mouseEvent) {
+            const picker = document.getElementById('edgePicker');
+            const types = [
+                { type: 'anchored_at', label: '📍 Anchored At', desc: 'event → place' },
+                { type: 'observes', label: '👁️ Observes', desc: 'perspective → event' },
+                { type: 'produced_by', label: '📄 Produced By', desc: 'artifact → perspective' },
+                { type: 'leads_to', label: '🔗 Leads To', desc: 'any → any' }
+            ];
+            picker.innerHTML = `<div style="padding:var(--space-xs);font-size:var(--text-xs);color:var(--room-text-muted);font-weight:600">CONNECT ${truncate(sourceNode.label, 12)} → ${truncate(targetNode.label, 12)}</div>` +
+                types.map(t => `<button class="edge-picker-btn" data-type="${t.type}">${t.label} <span style="font-size:10px;color:var(--room-text-muted)">${t.desc}</span></button>`).join('');
+
+            // Position near mouse
+            const rect = document.querySelector('.graph-container').getBoundingClientRect();
+            picker.style.left = (mouseEvent.clientX - rect.left + 10) + 'px';
+            picker.style.top = (mouseEvent.clientY - rect.top) + 'px';
+            picker.classList.add('show');
+
+            // Handle clicks
+            picker.querySelectorAll('.edge-picker-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const edgeType = btn.dataset.type;
+                    ROOM.addEdge(sourceNode._id, targetNode._id, edgeType, edgeType);
+                    ROOM.saveToStorage();
+                    updateGraph();
+                    syncJSON();
+                    updateStats();
+                    showToast(`Connected: ${sourceNode.label} → ${targetNode.label}`);
+                    picker.classList.remove('show');
+                });
+            });
+
+            // Close on click outside
+            setTimeout(() => {
+                const close = (e) => {
+                    if (!picker.contains(e.target)) {
+                        picker.classList.remove('show');
+                        document.removeEventListener('click', close);
+                    }
+                };
+                document.addEventListener('click', close);
+            }, 50);
         }
 
         /* ═══════════════════════════════════════════
@@ -826,7 +1054,7 @@ Content goes here…" rows="10" style="margin-top:var(--space-md)"></textarea>
         }
 
         /* ═══════════════════════════════════════════
-           Select Node
+           Select Node → show Detail Panel
            ═══════════════════════════════════════════ */
         function selectGraphNode(nodeId) {
             selectedNodeId = nodeId;
@@ -835,15 +1063,179 @@ Content goes here…" rows="10" style="margin-top:var(--space-md)"></textarea>
             nodeGroup.selectAll('.graph-node')
                 .classed('selected', d => d.id === nodeId);
 
-            // Highlight in list
-            document.querySelectorAll('.node-list-item').forEach(el => {
-                el.classList.remove('selected');
-            });
-            // Find and highlight in list
-            buildNodeList();
-
-            // Switch to nodes tab
+            // Switch to nodes tab and show detail
             switchPanel('nodes');
+            showDetailPanel(nodeId);
+        }
+
+        function showDetailPanel(nodeId) {
+            const node = ROOM.getNodeById(nodeId);
+            if (!node) return;
+
+            const listView = document.getElementById('nodesListView');
+            const detailView = document.getElementById('nodesDetailView');
+            listView.style.display = 'none';
+            detailView.style.display = 'block';
+
+            const places = ROOM.getPlaces();
+            const events = ROOM.getEvents();
+            const perspectives = ROOM.getPerspectives();
+            const icon = node.icon || ROOM.NODE_ICONS[node.type];
+            const color = ROOM.NODE_COLORS[node.type] || '#888';
+
+            let relationHTML = '';
+            if (node.type === 'event') {
+                relationHTML = `
+                    <div class="detail-section">
+                        <label class="form-label">📍 Anchored to Place</label>
+                        <select class="form-select" id="detailPlace">
+                            <option value="">-- none --</option>
+                            ${places.map(p => `<option value="${p.id}" ${p.id === node.place ? 'selected' : ''}>${p.icon || '📍'} ${p.label}</option>`).join('')}
+                        </select>
+                    </div>`;
+            } else if (node.type === 'perspective') {
+                relationHTML = `
+                    <div class="detail-section">
+                        <label class="form-label">⚡ Observes Event</label>
+                        <select class="form-select" id="detailEvent">
+                            <option value="">-- none --</option>
+                            ${events.map(e => `<option value="${e.id}" ${e.id === node.event ? 'selected' : ''}>${e.icon || '⚡'} ${e.label}</option>`).join('')}
+                        </select>
+                    </div>
+                    <div class="detail-section">
+                        <label class="form-label">Ontology</label>
+                        <input class="form-input" id="detailOntology" value="${node.ontology || ''}" placeholder="e.g. architectural">
+                    </div>
+                    <div class="detail-section">
+                        <label class="form-label">Visibility</label>
+                        <select class="form-select" id="detailVisibility">
+                            <option value="public" ${node.visibility === 'public' ? 'selected' : ''}>🌐 Public</option>
+                            <option value="private" ${node.visibility === 'private' ? 'selected' : ''}>🔒 Private</option>
+                        </select>
+                    </div>`;
+            } else if (node.type === 'artifact') {
+                relationHTML = `
+                    <div class="detail-section">
+                        <label class="form-label">👁️ Produced by Perspective</label>
+                        <select class="form-select" id="detailPerspective">
+                            <option value="">-- none --</option>
+                            ${perspectives.map(p => `<option value="${p.id}" ${p.id === node.perspective ? 'selected' : ''}>${p.icon || '👁️'} ${p.label}</option>`).join('')}
+                        </select>
+                    </div>`;
+            }
+
+            detailView.innerHTML = `
+                <button class="detail-back" id="detailBack">← Back to list</button>
+                <div class="detail-header">
+                    <span class="detail-icon">${icon}</span>
+                    <div>
+                        <div style="font-weight:600">${node.label}</div>
+                        <div class="detail-type" style="color:${color}">${node.type}</div>
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <label class="form-label">Label</label>
+                    <input class="form-input" id="detailLabel" value="${escapeHTML(node.label)}">
+                </div>
+                <div class="detail-section">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-textarea" id="detailDesc" rows="3" style="min-height:60px;font-family:var(--font-sans)">${escapeHTML(node.description || '')}</textarea>
+                </div>
+                ${relationHTML}
+                <div class="detail-section">
+                    <label class="form-label">Position (X, Y, Z)</label>
+                    <div class="form-row">
+                        <input class="form-input" id="detailPosX" type="number" value="${(node.position || [0, 0, 0])[0]}">
+                        <input class="form-input" id="detailPosY" type="number" value="${(node.position || [0, 0, 0])[1]}">
+                        <input class="form-input" id="detailPosZ" type="number" value="${(node.position || [0, 0, 0])[2]}">
+                    </div>
+                </div>
+                <div class="detail-actions">
+                    <button class="btn btn-primary" id="detailSave" style="flex:1">💾 Save</button>
+                    <button class="btn" id="detailDelete" style="flex:0 0 auto;opacity:0.6">🗑️</button>
+                </div>
+                <div style="font-size:var(--text-xs);color:var(--room-text-muted);margin-top:var(--space-md);font-family:var(--font-mono)">${node.id}</div>
+            `;
+
+            // Wire detail panel events
+            document.getElementById('detailBack').addEventListener('click', hideDetailPanel);
+            document.getElementById('detailSave').addEventListener('click', () => saveNodeDetail(nodeId));
+            document.getElementById('detailDelete').addEventListener('click', () => {
+                if (confirm(`Delete node "${node.label}"?`)) {
+                    ROOM.removeNode(nodeId);
+                    ROOM.saveToStorage();
+                    hideDetailPanel();
+                    updateGraph();
+                    buildNodeList();
+                    updateStats();
+                    syncJSON();
+                    showToast(`Deleted ${node.label}`);
+                }
+            });
+        }
+
+        function hideDetailPanel() {
+            selectedNodeId = null;
+            nodeGroup.selectAll('.graph-node').classed('selected', false);
+            document.getElementById('nodesListView').style.display = 'block';
+            document.getElementById('nodesDetailView').style.display = 'none';
+            buildNodeList();
+        }
+
+        function saveNodeDetail(nodeId) {
+            const updates = {
+                label: document.getElementById('detailLabel').value.trim(),
+                description: document.getElementById('detailDesc').value.trim(),
+                position: [
+                    parseFloat(document.getElementById('detailPosX').value) || 0,
+                    parseFloat(document.getElementById('detailPosY').value) || 0,
+                    parseFloat(document.getElementById('detailPosZ').value) || 0
+                ]
+            };
+
+            const node = ROOM.getNodeById(nodeId);
+
+            // Handle relationship changes (re-point edges)
+            if (node.type === 'event') {
+                const newPlace = document.getElementById('detailPlace')?.value || '';
+                if (newPlace !== (node.place || '')) {
+                    // Remove old anchored_at edge
+                    if (node.place) ROOM.removeEdge(nodeId, node.place, 'anchored_at');
+                    // Add new one
+                    if (newPlace) ROOM.addEdge(nodeId, newPlace, 'anchored_at', 'anchored_at');
+                    updates.place = newPlace;
+                }
+            }
+            if (node.type === 'perspective') {
+                const newEvent = document.getElementById('detailEvent')?.value || '';
+                if (newEvent !== (node.event || '')) {
+                    if (node.event) ROOM.removeEdge(nodeId, node.event, 'observes');
+                    if (newEvent) ROOM.addEdge(nodeId, newEvent, 'observes', 'observes');
+                    updates.event = newEvent;
+                }
+                updates.ontology = document.getElementById('detailOntology')?.value.trim() || node.ontology;
+                updates.visibility = document.getElementById('detailVisibility')?.value || node.visibility;
+            }
+            if (node.type === 'artifact') {
+                const newPersp = document.getElementById('detailPerspective')?.value || '';
+                if (newPersp !== (node.perspective || '')) {
+                    if (node.perspective) ROOM.removeEdge(nodeId, node.perspective, 'produced_by');
+                    if (newPersp) ROOM.addEdge(nodeId, newPersp, 'produced_by', 'produced_by');
+                    updates.perspective = newPersp;
+                }
+            }
+
+            ROOM.updateNode(nodeId, updates);
+            ROOM.saveToStorage();
+            updateGraph();
+            buildNodeList();
+            buildOntologyChips();
+            updateStats();
+            syncJSON();
+            showToast(`Saved: ${updates.label}`);
+
+            // Refresh detail panel to show updated data
+            showDetailPanel(nodeId);
         }
 
         /* ═══════════════════════════════════════════
@@ -1091,12 +1483,22 @@ Content goes here…" rows="10" style="margin-top:var(--space-md)"></textarea>
             document.getElementById('btnRestart').addEventListener('click', () => {
                 updateGraph();
             });
+            document.getElementById('btnConnect').addEventListener('click', () => {
+                connectMode = !connectMode;
+                document.getElementById('btnConnect').classList.toggle('active', connectMode);
+                document.querySelector('.graph-container').style.cursor = connectMode ? 'crosshair' : '';
+                showToast(connectMode ? '🔗 Connect mode ON — drag between nodes' : 'Connect mode OFF');
+            });
             document.getElementById('btnClearStorage').addEventListener('click', () => {
                 if (confirm('Reset to default data? Your edits will be lost.')) {
                     ROOM.clearStorage();
                     location.reload();
                 }
             });
+
+            // Track shift key for connect mode
+            document.addEventListener('keydown', e => { if (e.key === 'Shift') document.querySelector('.graph-container').style.cursor = 'crosshair'; });
+            document.addEventListener('keyup', e => { if (e.key === 'Shift' && !connectMode) document.querySelector('.graph-container').style.cursor = ''; });
 
             // Resize
             window.addEventListener('resize', () => {
