@@ -17,3 +17,7 @@ desktop.ini
 *.tmp
 *.log
 .vercel
+
+# GLB assets (too large for git)
+glb-optimize/
+*.glb

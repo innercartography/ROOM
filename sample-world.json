@@ -9,56 +9,42 @@
     },
     "nodes": [
         {
-            "id": "place-exterior",
+            "id": "place-lobby",
             "type": "place",
-            "label": "Frontier Tower — Exterior",
-            "description": "The street-level approach to Frontier Tower at 995 Market St. Where arrival begins.",
+            "label": "Frontier Tower — Lobby & Entrance",
+            "description": "The street-level approach and lobby of Frontier Tower at 995 Market St. The threshold between the street and the spatial internet.",
             "position": [
                 0,
                 0,
                 0
             ],
-            "glb": "3_7_2026.glb",
-            "rp1Scene": "https://team044.hackathon.rp1.dev",
-            "icon": "🏛️"
-        },
-        {
-            "id": "place-lobby",
-            "type": "place",
-            "label": "Main Lobby",
-            "description": "The threshold between the street and the spatial internet. A liminal zone between worlds.",
-            "position": [
-                0,
-                0,
-                50
-            ],
-            "glb": "Lobby.glb",
+            "glb": "Lobby_demo.glb",
             "rp1Scene": "https://team044.hackathon.rp1.dev",
             "icon": "🚪"
         },
         {
-            "id": "place-2nd-floor",
+            "id": "place-16th-floor",
             "type": "place",
-            "label": "2nd Floor — Hackathon Space",
+            "label": "16th Floor — Hackathon Space",
             "description": "Where builders gather. Desks, screens, whiteboards, and the hum of creation. The primary action space of the Open Metaverse Hackathon.",
             "position": [
                 0,
-                5,
-                100
+                16,
+                50
             ],
-            "glb": "3_7_2026.glb",
+            "glb": "3_7_2026_final.glb",
             "rp1Scene": "https://team044.hackathon.rp1.dev",
             "icon": "⚡"
         },
         {
-            "id": "place-ufo-room",
+            "id": "place-alien-lounge",
             "type": "place",
-            "label": "The UFO Room",
+            "label": "The Alien Lounge",
             "description": "A themed room hidden within the building. The secret bonus level. 🛸",
             "position": [
                 20,
-                5,
-                120
+                16,
+                70
             ],
             "glb": "",
             "rp1Scene": "https://team044.hackathon.rp1.dev",
@@ -84,7 +70,7 @@
             "type": "event",
             "label": "Kickoff & Opening Remarks",
             "description": "Sean Mann (Co-Founder & CEO, RP1) and Dean Robertson (Co-Founder & Chief Architect, RP1) introduce the vision. Open standards, open fabrics, open future.",
-            "place": "place-2nd-floor",
+            "place": "place-16th-floor",
             "position": [
                 2,
                 6,
@@ -98,7 +84,7 @@
             "type": "event",
             "label": "Workshop: AI & Vibe Coding",
             "description": "Using Claude & Gemini to accelerate spatial development. Live coding demo with VCN.",
-            "place": "place-2nd-floor",
+            "place": "place-16th-floor",
             "position": [
                 -5,
                 5.5,
@@ -112,7 +98,7 @@
             "type": "event",
             "label": "Workshop: Manifolder & MCP",
             "description": "Patched Reality demonstrates Manifolder — connecting AI Agents to browse, edit, and connect scenes and servers across fabrics using MCP.",
-            "place": "place-2nd-floor",
+            "place": "place-16th-floor",
             "position": [
                 -3,
                 5.5,
@@ -126,7 +112,7 @@
             "type": "event",
             "label": "First Polycam Capture",
             "description": "The first Gaussian splat of the hackathon space is captured. The building begins to remember.",
-            "place": "place-2nd-floor",
+            "place": "place-16th-floor",
             "position": [
                 -3,
                 5.5,
@@ -140,7 +126,7 @@
             "type": "event",
             "label": "Lightning Talks",
             "description": "3-4 rapid 10-min talks: Common pitfalls, debugging tips, deployment strategies for spatial apps.",
-            "place": "place-2nd-floor",
+            "place": "place-16th-floor",
             "position": [
                 4,
                 6,
@@ -154,7 +140,7 @@
             "type": "event",
             "label": "UFO Room Discovery",
             "description": "Someone finds the hidden UFO-themed room. The secret level is unlocked.",
-            "place": "place-ufo-room",
+            "place": "place-alien-lounge",
             "position": [
                 21,
                 5.5,
@@ -168,7 +154,7 @@
             "type": "event",
             "label": "🚩 Code Complete",
             "description": "4:00 PM Sunday. Keyboards down. No more coding. Deploy and prepare for judging.",
-            "place": "place-2nd-floor",
+            "place": "place-16th-floor",
             "position": [
                 0,
                 7,
@@ -182,7 +168,7 @@
             "type": "event",
             "label": "Judging & Demo Showcase",
             "description": "Teams demo at stations: 3 min demo + 2 min Q&A. Judges rotate through floors evaluating all projects. Categories: Best Tools, Best Places, Best AI, Best Overall, People's Choice.",
-            "place": "place-2nd-floor",
+            "place": "place-16th-floor",
             "position": [
                 0,
                 6,
@@ -196,7 +182,7 @@
             "type": "event",
             "label": "Awards Ceremony",
             "description": "Winners announced. Best Tools, Best Places, Best AI, Best Overall, People's Choice. Then the GDC Spatial XR Mixer kicks off.",
-            "place": "place-2nd-floor",
+            "place": "place-16th-floor",
             "position": [
                 3,
                 7,
@@ -210,7 +196,7 @@
             "type": "event",
             "label": "The Window Moment",
             "description": "An RP1 founder gestures toward the floor-to-ceiling glass and delivers the thesis: all of real estate will need to spatialize. The window becomes a symbol.",
-            "place": "place-2nd-floor",
+            "place": "place-16th-floor",
             "position": [
                 8,
                 6,
@@ -402,47 +388,47 @@
         },
         {
             "source": "event-opening",
-            "target": "place-2nd-floor",
+            "target": "place-16th-floor",
             "type": "anchored_at"
         },
         {
             "source": "event-workshop-vcn",
-            "target": "place-2nd-floor",
+            "target": "place-16th-floor",
             "type": "anchored_at"
         },
         {
             "source": "event-workshop-manifolder",
-            "target": "place-2nd-floor",
+            "target": "place-16th-floor",
             "type": "anchored_at"
         },
         {
             "source": "event-first-splat",
-            "target": "place-2nd-floor",
+            "target": "place-16th-floor",
             "type": "anchored_at"
         },
         {
             "source": "event-lightning-talks",
-            "target": "place-2nd-floor",
+            "target": "place-16th-floor",
             "type": "anchored_at"
         },
         {
             "source": "event-ufo-discovery",
-            "target": "place-ufo-room",
+            "target": "place-alien-lounge",
             "type": "anchored_at"
         },
         {
             "source": "event-code-complete",
-            "target": "place-2nd-floor",
+            "target": "place-16th-floor",
             "type": "anchored_at"
         },
         {
             "source": "event-demo-day",
-            "target": "place-2nd-floor",
+            "target": "place-16th-floor",
             "type": "anchored_at"
         },
         {
             "source": "event-awards",
-            "target": "place-2nd-floor",
+            "target": "place-16th-floor",
             "type": "anchored_at"
         },
         {
@@ -497,7 +483,7 @@
         },
         {
             "source": "event-window-insight",
-            "target": "place-2nd-floor",
+            "target": "place-16th-floor",
             "type": "anchored_at"
         },
         {
@@ -506,18 +492,13 @@
             "type": "observes"
         },
         {
-            "source": "place-exterior",
-            "target": "place-lobby",
-            "type": "leads_to"
-        },
-        {
             "source": "place-lobby",
-            "target": "place-2nd-floor",
+            "target": "place-16th-floor",
             "type": "leads_to"
         },
         {
-            "source": "place-2nd-floor",
-            "target": "place-ufo-room",
+            "source": "place-16th-floor",
+            "target": "place-alien-lounge",
             "type": "leads_to",
             "label": "🔍 Secret Passage"
         }
@@ -527,16 +508,12 @@
         "description": "Follow the thread of spatial memory from the street to the secret room. Each stop holds multiple perspectives — switch between them to see the same place through different eyes.",
         "waypoints": [
             {
-                "node": "place-exterior",
-                "narration": "You're standing outside Frontier Tower in San Francisco's SoMa district. March 7th, 2026. The first Open Metaverse Hackathon is about to begin. Step inside."
-            },
-            {
                 "node": "place-lobby",
-                "narration": "The lobby is a threshold — the last moment of the ordinary world before you enter the spatial internet. The elevator is waiting."
+                "narration": "You're standing in the lobby of Frontier Tower, 995 Market St, San Francisco. March 7th, 2026. The first Open Metaverse Hackathon is about to begin. Take the elevator up."
             },
             {
                 "node": "event-opening",
-                "narration": "The 2nd floor. Sean Mann is at the mic. 'The metaverse should be open, interoperable, and accessible — like the early web.' The room nods. Building begins."
+                "narration": "The 16th floor. Sean Mann is at the mic. 'The metaverse should be open, interoperable, and accessible — like the early web.' The room nods. Building begins."
             },
             {
                 "node": "event-workshop-manifolder",
@@ -560,7 +537,7 @@
             },
             {
                 "node": "event-ufo-discovery",
-                "narration": "Someone found it. The hidden room. The secret level. 🛸"
+                "narration": "Someone found it. The hidden room. The Alien Lounge. 🛸"
             },
             {
                 "node": "perspective-ufo-lore",
