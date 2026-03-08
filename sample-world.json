@@ -29,8 +29,8 @@
             "description": "Where builders gather. The primary action space of the Open Metaverse Hackathon.",
             "position": [
                 0,
-                16,
-                100
+                0,
+                60
             ],
             "glb": "3_7_2026_final.glb",
             "rp1Scene": "https://enter.rp1.com/?start_cid=553&lat=-18.162044841382034&lon=-168.73454053422424&rad=6371000",
@@ -42,9 +42,9 @@
             "label": "The Alien Lounge",
             "description": "Silver mylar walls, glow-in-the-dark stars, the Arecibo message. A room that takes its own mythology seriously.",
             "position": [
-                50,
-                2,
-                50
+                0,
+                0,
+                120
             ],
             "secret": true,
             "icon": "🛸"
@@ -56,9 +56,9 @@
             "description": "March 7th, 2026. Walking into 995 Market St for the first Open Metaverse Hackathon.",
             "place": "place-lobby",
             "position": [
+                3,
                 2,
-                1,
-                3
+                2
             ],
             "time": "2026-03-07T09:00:00-08:00",
             "icon": "🚶"
@@ -70,9 +70,9 @@
             "description": "Building ROOM at the intersection of Tools, Places, and AI tracks. Proving that places can hold memory.",
             "place": "place-16th-floor",
             "position": [
-                3,
-                17,
-                101
+                0,
+                2,
+                60
             ],
             "time": "2026-03-07T10:00:00-08:00",
             "icon": "🔨"
@@ -84,9 +84,9 @@
             "description": "Sunday afternoon. The spatial internet has memory now.",
             "place": "place-16th-floor",
             "position": [
-                -3,
-                17,
-                99
+                -4,
+                2,
+                58
             ],
             "time": "2026-03-08T14:00:00-08:00",
             "icon": "🎤"
@@ -98,9 +98,9 @@
             "description": "A break from building. Down the elevator, through a door, into another world entirely.",
             "place": "place-alien-lounge",
             "position": [
-                51,
-                3,
-                51
+                0,
+                2,
+                120
             ],
             "time": "2026-03-07T22:00:00-08:00",
             "icon": "🔍"
@@ -115,9 +115,9 @@
             "visibility": "public",
             "content": "Your brain has dedicated architecture for spatial memory. Place cells fire when you're *here*. Grid cells create abstract coordinate systems. ROOM takes this biological principle seriously.\n\nBy anchoring knowledge to spatial coordinates, we're not just making data spatially accessible — we're making it neurologically compatible with how humans actually remember.\n\nROOM reduces spatial memory to four atomic types:\n- **Place** — where it happened\n- **Event** — what happened\n- **Perspective** — what it meant\n- **Artifact** — what it produced\n\nNavigation through ROOM becomes epistemic archaeology: walking through space is walking through time, through perspective, through sedimentary layers of collective understanding.",
             "position": [
-                -5,
-                18,
-                102
+                -10,
+                5,
+                64
             ],
             "icon": "🧠",
             "capsule": true
@@ -132,9 +132,9 @@
             "visibility": "public",
             "content": "The Metaverse Spatial Fabric (MSF) is the map of the metaverse. Unlike bounded game engines (~10km), RP1's map spans hundreds of millions of light years.\n\n**Three Tiers:**\n1. **Celestial** — Galaxies, star systems, planets\n2. **Terrestrial** — Root → Land → Country → State → City → Parcel\n3. **Physical** — GLB objects, Gaussian splats, avatars\n\nThe browser doesn't download the map. It queries a Map Service for objects near the user's position — like DNS for space.",
             "position": [
+                10,
                 5,
-                18,
-                98
+                56
             ],
             "icon": "🌐",
             "capsule": true
@@ -150,8 +150,8 @@
             "content": "The web gave us pages — flat surfaces covered in text, linked by addresses. The spatial internet will give us places — volumetric environments where knowledge doesn't sit on surfaces, it inhabits them.\n\nROOM explores what happens when a place doesn't just look like somewhere — when it remembers what happened there, holds the perspectives of everyone who passed through, and offers that memory to anyone willing to walk in.\n\nThis is the core thesis: spatial memory as infrastructure.",
             "position": [
                 0,
-                19,
-                103
+                8,
+                68
             ],
             "icon": "🏛️",
             "capsule": true
@@ -166,9 +166,9 @@
             "visibility": "public",
             "content": "Five non-negotiables from the Open Metaverse:\n1. **Interoperability** — No software lock-in\n2. **No Device Lock-In** — Phones, AR glasses, VR, desktops\n3. **Ownership** — You own your data, content, identity\n4. **Frictionless Access** — Browse to enter. No app downloads.\n5. **Open Tooling** — Creator ecosystem, not a closed platform\n\nAOL built a walled garden. Netscape and open HTTP won. The same pattern applies to spatial computing.",
             "position": [
-                7,
-                17,
-                103
+                12,
+                3,
+                64
             ],
             "icon": "📜",
             "capsule": true
@@ -183,9 +183,9 @@
             "visibility": "public",
             "content": "Spatial information organizes into four ascending layers. Most tooling today operates on layers 2–4: rendering, networking, interaction. The semantic layer — what makes geometry into meaning — is almost entirely absent.\n\nWithout semantics, every layer above remains mute. Geometry without semantics is topography without territory. A photorealistic render has no way to declare what it depicts, who was there, what it meant.\n\nROOM provides the primitives that let the other layers speak. That's the gap this project fills.",
             "position": [
-                -6,
-                17,
-                98
+                -12,
+                3,
+                56
             ],
             "icon": "📐",
             "capsule": true
@@ -200,9 +200,9 @@
             "visibility": "public",
             "content": "Shared memory systems have historically demanded a sacrifice: your private cognition becomes the property of the platform. ROOM refuses this bargain.\n\n**Three visibility levels:**\n- `private` — Local only. Encrypted at rest. No network exposure.\n- `shared` — Visible to invited participants. Permission-gated.\n- `public` — Open. Verifiable. Indexed by the spatial internet.\n\nYour thinking remains yours. The graph is federated — no central authority controls what gets remembered or how perspectives get weighted.",
             "position": [
-                6,
-                19,
-                100
+                8,
+                7,
+                68
             ],
             "icon": "🔒",
             "capsule": true
@@ -217,9 +217,9 @@
             "visibility": "public",
             "content": "The Alien Lounge isn't just a weird room. It's a prototype of something important: a space that accumulates lore. Myths, inside jokes, ritual significance — the things that turn a location into a place.\n\nDigital villages form the same way physical ones do: through repeated visits, shared stories, accumulated meaning. The spatial internet needs infrastructure for this — not just rendering, but remembering.\n\nROOM's ontology system lets different communities bring different schemas. The architectural view of this room is just walls and mylar. The mythological view is an alien transmission station. Both are valid. Both coexist.",
             "position": [
-                52,
-                3,
-                49
+                -8,
+                4,
+                124
             ],
             "icon": "🏘️",
             "capsule": true
@@ -234,9 +234,9 @@
             "visibility": "public",
             "content": "A perspective contributed to ROOM isn't a finished thought. It's a shard — an incomplete piece of understanding that gains context from proximity to other shards.\n\nThis is how actual memory works. You don't remember events as complete narratives. You remember fragments: a sound, a face, a feeling about the light. Your hippocampus weaves them together when you revisit the place.\n\nROOM's refinement pipeline mirrors this: capture raw → structure → refine → cross-reference → discover connections you didn't know existed. Knowledge becomes emergent rather than authored.",
             "position": [
-                49,
+                8,
                 4,
-                52
+                116
             ],
             "icon": "🔮",
             "capsule": true
@@ -251,9 +251,9 @@
             "visibility": "public",
             "content": "Resonance Lab is a loose collaboration between three builders working at the edges of spatial computing, personal AI, and collective knowledge. Not a finished plan — a shared sense that something important was converging.\n\nWhat the hackathon clarified: spatial environments are proximity-based service delivery systems. RP1 isn't building a virtual world; it's building a browser. Services register into a shared coordinate system and activate when you're near them.\n\nBret explores AI carrying personal identity over time. Joshua builds infrastructure for collective memory. Mike asks whether alignment between people can be made visible before they've found each other.\n\nMost details are still unresolved. The most interesting discoveries are probably the ones that surprise all of us.",
             "position": [
-                -4,
-                18,
-                99
+                -6,
+                6,
+                54
             ],
             "icon": "🔬",
             "capsule": true
@@ -267,9 +267,9 @@
             "src": "https://innercartography.github.io/roomhyperblog/",
             "format": "html",
             "position": [
-                1,
-                20,
-                104
+                3,
+                10,
+                70
             ],
             "icon": "📝"
         },
@@ -282,9 +282,9 @@
             "src": "https://innercartography.github.io/resonance-labs/",
             "format": "html",
             "position": [
-                -5,
-                19,
-                100
+                -9,
+                8,
+                52
             ],
             "icon": "📡"
         },
@@ -297,9 +297,9 @@
             "src": "https://omb.wiki",
             "format": "html",
             "position": [
-                6,
-                19,
-                97
+                13,
+                7,
+                54
             ],
             "icon": "📚"
         },
@@ -312,9 +312,9 @@
             "src": "https://github.com/innercartography/ROOM",
             "format": "json",
             "position": [
-                -7,
-                18,
-                97
+                -14,
+                5,
+                54
             ],
             "icon": "📦"
         }

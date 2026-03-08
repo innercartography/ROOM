@@ -718,6 +718,11 @@
     let tourStep = 0;
     let tourWaypoints = [];
 
+    // WASD movement state
+    const keys = { w: false, a: false, s: false, d: false, q: false, e: false, shift: false };
+    const MOVE_SPEED = 0.5;
+    const FAST_SPEED = 1.2;
+
     /* ═══════════════════════════════════════════
        Init
        ═══════════════════════════════════════════ */
@@ -736,7 +741,7 @@
 
       // Camera
       camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-      camera.position.set(0, 12, 30);
+      camera.position.set(15, 10, -15);
 
       // Renderer
       renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -761,7 +766,7 @@
       controls.dampingFactor = 0.05;
       controls.minDistance = 5;
       controls.maxDistance = 200;
-      controls.target.set(0, 5, 50);
+      controls.target.set(0, 2, 0);
       controls.update();
 
       // Lighting
@@ -784,6 +789,25 @@
 
       // Events
       setupEvents();
+
+      // Check ?place= param and fly to that place
+      const urlParams = new URLSearchParams(window.location.search);
+      const startPlace = urlParams.get('place');
+      if (startPlace) {
+        const place = ROOM.getNodeById(startPlace);
+        if (place) {
+          const pos = place.position || [0, 0, 0];
+          camera.position.set(pos[0] + 20, pos[1] + 12, pos[2] + 20);
+          controls.target.set(pos[0], pos[1] + 2, pos[2]);
+          controls.update();
+          // Highlight matching location button
+          document.querySelectorAll('.location-btn').forEach(b => b.classList.remove('active'));
+          const btns = document.querySelectorAll('.location-btn');
+          ROOM.getPlaces().forEach((p, i) => {
+            if (p.id === startPlace && btns[i]) btns[i].classList.add('active');
+          });
+        }
+      }
 
       // Hide loading
       setTimeout(() => {
@@ -1231,14 +1255,17 @@
       // Reset camera
       document.getElementById('btnReset').addEventListener('click', () => {
         animateCamera(
-          new THREE.Vector3(0, 12, 30),
-          new THREE.Vector3(0, 5, 50),
+          new THREE.Vector3(15, 10, -15),
+          new THREE.Vector3(0, 2, 0),
           1000
         );
       });
 
-      // Keyboard
+      // Keyboard — WASD movement + tour controls
       document.addEventListener('keydown', (e) => {
+        const k = e.key.toLowerCase();
+        if (k in keys) keys[k] = true;
+        if (e.key === 'Shift') keys.shift = true;
         if (e.key === 'Escape') {
           if (tourActive) exitTour();
           else closeDetail();
@@ -1251,6 +1278,11 @@
           }
           if (e.key === 'ArrowLeft') goToTourStep(tourStep - 1);
         }
+      });
+      document.addEventListener('keyup', (e) => {
+        const k = e.key.toLowerCase();
+        if (k in keys) keys[k] = false;
+        if (e.key === 'Shift') keys.shift = false;
       });
 
       // Resize
@@ -1269,6 +1301,22 @@
        ═══════════════════════════════════════════ */
     function animate() {
       requestAnimationFrame(animate);
+
+      // WASD movement — relative to camera facing direction
+      const speed = keys.shift ? FAST_SPEED : MOVE_SPEED;
+      const forward = new THREE.Vector3();
+      camera.getWorldDirection(forward);
+      forward.y = 0;
+      forward.normalize();
+      const right = new THREE.Vector3().crossVectors(forward, camera.up).normalize();
+
+      if (keys.w) { camera.position.addScaledVector(forward, speed); controls.target.addScaledVector(forward, speed); }
+      if (keys.s) { camera.position.addScaledVector(forward, -speed); controls.target.addScaledVector(forward, -speed); }
+      if (keys.a) { camera.position.addScaledVector(right, -speed); controls.target.addScaledVector(right, -speed); }
+      if (keys.d) { camera.position.addScaledVector(right, speed); controls.target.addScaledVector(right, speed); }
+      if (keys.q) { camera.position.y += speed; controls.target.y += speed; }
+      if (keys.e) { camera.position.y -= speed; controls.target.y -= speed; }
+
       controls.update();
 
       // Gentle float animation for markers
