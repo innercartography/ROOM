@@ -727,8 +727,14 @@
        Init
        ═══════════════════════════════════════════ */
     async function init() {
-      // Load world data
-      await ROOM.loadWorldFromURL('sample-world.json');
+      // Load world data — prefer localStorage (editor saves here), fall back to file
+      const saved = ROOM.loadFromStorage();
+      if (saved) {
+        console.log('ROOM Viewer: loaded from localStorage (editor data)');
+      } else {
+        await ROOM.loadWorldFromURL('sample-world.json');
+        console.log('ROOM Viewer: loaded from sample-world.json (first run)');
+      }
       const world = ROOM.getWorld();
 
       // Collect ontologies
@@ -875,33 +881,42 @@
         scene.add(group);
       });
 
-      // Connection lines between places
-      const edges = ROOM.getEdges('leads_to');
-      edges.forEach(edge => {
+      // Connection lines for ALL edge types
+      const edgeColors = {
+        leads_to: 0x4a9eff,     // blue
+        anchored_at: 0xe67e22,  // orange
+        observes: 0x7c6aff,     // purple
+        produced_by: 0x2ecc71   // green
+      };
+      const allEdges = ROOM.getEdges();
+      allEdges.forEach(edge => {
         const sourceNode = ROOM.getNodeById(edge.source);
         const targetNode = ROOM.getNodeById(edge.target);
         if (!sourceNode || !targetNode) return;
+        if (!sourceNode.position || !targetNode.position) return;
 
-        const sp = sourceNode.position || [0, 0, 0];
-        const tp = targetNode.position || [0, 0, 0];
+        const sp = sourceNode.position;
+        const tp = targetNode.position;
+        const edgeColor = edgeColors[edge.type] || 0x888888;
+        const isLeadsTo = edge.type === 'leads_to';
 
         const points = [
           new THREE.Vector3(sp[0], sp[1] + 0.1, sp[2]),
           new THREE.Vector3(
             (sp[0] + tp[0]) / 2,
-            Math.max(sp[1], tp[1]) + 3,
+            Math.max(sp[1], tp[1]) + (isLeadsTo ? 3 : 1.5),
             (sp[2] + tp[2]) / 2
           ),
           new THREE.Vector3(tp[0], tp[1] + 0.1, tp[2])
         ];
 
         const curve = new THREE.QuadraticBezierCurve3(...points);
-        const curvePoints = curve.getPoints(50);
+        const curvePoints = curve.getPoints(isLeadsTo ? 50 : 30);
         const lineGeo = new THREE.BufferGeometry().setFromPoints(curvePoints);
         const lineMat = new THREE.LineBasicMaterial({
-          color: ROOM.NODE_COLORS.place,
+          color: edgeColor,
           transparent: true,
-          opacity: 0.15
+          opacity: isLeadsTo ? 0.2 : 0.12
         });
         const line = new THREE.Line(lineGeo, lineMat);
         scene.add(line);
