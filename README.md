@@ -11,24 +11,44 @@
 
 <p align="center">
   <a href="https://room-openmetaverse.vercel.app"><img src="https://img.shields.io/badge/▶_Live_Demo-room--openmetaverse.vercel.app-7C6AFF?style=for-the-badge&logoColor=white" alt="Live Demo" /></a>
+  &nbsp;
+  <a href="https://innercartography.github.io/roomhyperblog/"><img src="https://img.shields.io/badge/📝_Hyperblog-v3-FF6B6B?style=for-the-badge" alt="Hyperblog v3" /></a>
 </p>
 
 <p align="center">
   <a href="https://omb.wiki/en/hackathon/tracks/places"><img src="https://img.shields.io/badge/🏆_Track-PLACES-4A9EFF?style=flat-square" alt="PLACES Track" /></a>
   <a href="https://omb.wiki/en/hackathon"><img src="https://img.shields.io/badge/🏛️_Open_Metaverse_Hackathon-March_7--8,_2026-FFC44A?style=flat-square" alt="Hackathon" /></a>
   <img src="https://img.shields.io/badge/📍_Frontier_Tower-San_Francisco-B44AFF?style=flat-square" alt="Location" />
-  <img src="https://img.shields.io/badge/Zero_Build_Step-Just_HTML%2FJS%2FJSON-69DB7C?style=flat-square" alt="Zero Build" />
+  <img src="https://img.shields.io/badge/Zero_Build_Step-HTML%2FJS%2FJSON-69DB7C?style=flat-square" alt="Zero Build" />
 </p>
 
 ---
 
-## The Problem: Ghost Worlds 👻
+## What Is ROOM?
 
-Photorealistic Gaussian splats create stunning 3D environments — but they have **no memory**. No collision, no surface topology, no events, no searchability. Beautiful ghost worlds you can see but can't understand.
+Photorealistic Gaussian splats create stunning 3D environments — but they are **ghost worlds**. No memory, no events, no searchability. Beautiful places you can see but can't understand.
 
-**ROOM solves this differently.** Instead of fighting the ghost world with collision meshes, give it a semantic memory layer — a knowledge graph that gives coordinates meaning.
+**ROOM adds the missing layer.** A semantic memory graph that gives spatial coordinates *meaning* — not collision meshes, not physics, but knowledge.
 
 > *Gaussian splats give you the Visual. ROOM gives you the Meaning.*
+
+---
+
+## The Spatial Information Stack
+
+```
+┌──────────────────────────────────────────────────┐
+│  🎨  Visual        Pixels, textures, rendering   │  ← Gaussian Splats
+├──────────────────────────────────────────────────┤
+│  📐  Geometric     3D shape, volume, topology    │  ← Meshes
+├──────────────────────────────────────────────────┤
+│  ⚙️  Physical      Collision, dynamics, forces   │  ← Physics engines
+├──────────────────────────────────────────────────┤
+│  🧠  SEMANTIC      Meaning, memory, knowledge    │  ← ROOM ✦
+└──────────────────────────────────────────────────┘
+```
+
+ROOM operates at the **foundational Semantic layer** — below everything else. It adds what Gaussian splats are missing: **what a place means**, not just what it looks like.
 
 ---
 
@@ -47,35 +67,18 @@ Multiple Perspectives on the same Event coexist without collapsing. An architect
 
 ---
 
-## Where ROOM Lives — The Spatial Stack
-
-```
-┌──────────────────────────────────────────────────┐
-│  🎨  Visual        Pixels, textures, rendering   │  ← Gaussian Splats
-├──────────────────────────────────────────────────┤
-│  📐  Geometric     3D shape, volume, topology    │  ← Meshes
-├──────────────────────────────────────────────────┤
-│  ⚙️  Physical      Collision, dynamics, forces   │  ← Physics engines
-├──────────────────────────────────────────────────┤
-│  🧠  SEMANTIC      Meaning, memory, knowledge    │  ← ROOM ✦
-└──────────────────────────────────────────────────┘
-```
-
-ROOM operates at the **foundational Semantic layer** — below everything else. It adds the layer that Gaussian splats are missing: **what a place means**, not just what it looks like.
-
----
-
 ## Live Demo
 
 **→ [room-openmetaverse.vercel.app](https://room-openmetaverse.vercel.app)**
 
-Three pages, zero build step:
+Four pages, zero build step:
 
 | Page | What it does |
 |------|-------------|
-| **Landing** (`/`) | Spatial stack, Ghost World problem/solution, four primitives, demo flow, Frontier Tower locations |
-| **Viewer** (`/viewer`) | 3D Three.js scene with semantic node overlays, guided 11-stop tour, perspective switching |
-| **Editor** (`/editor`) | D3.js force-directed knowledge graph editor with full CRUD, JSON export, and Claudesidian PKG bridge |
+| **Landing** (`/`) | Spatial stack explainer, Ghost World problem/solution, four primitives, demo flow |
+| **Tower** (`/tower`) | 3D Three.js model of Frontier Tower with interactive floor labels — click a floor to explore its knowledge graph |
+| **Viewer** (`/viewer`) | 3D scene with semantic node overlays, WASD navigation, guided 14-stop tour, ontology filtering, perspective switching |
+| **Editor** (`/editor`) | D3.js force-directed knowledge graph editor with full CRUD, drag persistence, JSON export, and Claudesidian PKG bridge |
 
 ---
 
@@ -98,12 +101,15 @@ Open [localhost:3000](http://localhost:3000) and explore.
 ```
 room-openmetaverse/
 ├── index.html          Landing page — hero, spatial stack, primitives, demo flow
-├── viewer.html         Three.js 3D viewer + CSS2DRenderer + guided tour
+├── tower.html          Three.js 3D tower with interactive floor navigation
+├── viewer.html         Three.js 3D viewer + CSS2DRenderer + guided tour + WASD
 ├── editor.html         D3.js force-directed graph editor + entity sidebar
 ├── room.js             Shared data layer — CRUD, queries, validation, events
 ├── styles.css          Design system — dark space theme, glassmorphism, animations
-├── sample-world.json   24-node demo graph (Frontier Tower hackathon data)
+├── sample-world.json   18-node demo graph (Frontier Tower · knowledge capsules)
 ├── world.json          User's active world file
+├── rp1-scene.json      RP1 spatial fabric scene config
+├── frontier-tower.jpg  Hero image of the building
 ├── favicon.svg         ROOM logo
 └── vercel.json         Deployment config (clean URLs, CORS for JSON)
 ```
@@ -113,13 +119,14 @@ room-openmetaverse/
 A zero-dependency shared module exposing the full ROOM API:
 
 ```javascript
-ROOM.loadWorldFromURL('sample-world.json');  // Load a world
-ROOM.getPlaces();                             // → all Place nodes
-ROOM.getEventsAtPlace('place-lobby');         // → Events anchored here
-ROOM.getPerspectivesForEvent('event-opening');// → Multiple viewpoints
-ROOM.getPlaceContext('place-2nd-floor');      // → Full context tree
-ROOM.obsidianToPerspective(markdown);         // → Claudesidian bridge
-ROOM.exportWorld();                           // → Portable JSON
+ROOM.loadWorldFromURL('sample-world.json');   // Load a world
+ROOM.getPlaces();                              // → all Place nodes
+ROOM.getEventsAtPlace('place-lobby');          // → Events anchored here
+ROOM.getPerspectivesForEvent('event-hackathon'); // → Multiple viewpoints
+ROOM.getPlaceContext('place-16th-floor');      // → Full context tree
+ROOM.obsidianToPerspective(markdown);          // → Claudesidian bridge
+ROOM.exportWorld();                            // → Portable JSON
+ROOM.validate();                               // → Schema validation
 ```
 
 ---
@@ -133,12 +140,12 @@ Flat JSON graph — portable, human-readable, no build step required.
   "version": "room/v0.1",
   "meta": { "title": "...", "created": "..." },
   "nodes": [
-    { "id": "place-exterior", "type": "place", "label": "Frontier Tower", "position": [0,0,0] },
+    { "id": "place-lobby", "type": "place", "label": "Frontier Tower", "position": [0,0,0] },
     { "id": "event-kickoff", "type": "event", "label": "Hackathon Kickoff", "time": "..." },
-    { "id": "perspective-arch", "type": "perspective", "ontology": "architectural", "content": "..." }
+    { "id": "capsule-thesis", "type": "perspective", "ontology": "experiential", "content": "...", "capsule": true }
   ],
   "edges": [
-    { "source": "event-kickoff", "target": "place-exterior", "type": "anchored_at" }
+    { "source": "event-kickoff", "target": "place-lobby", "type": "anchored_at" }
   ],
   "tour": { "title": "...", "waypoints": [{ "node": "...", "narration": "..." }] }
 }
@@ -146,7 +153,39 @@ Flat JSON graph — portable, human-readable, no build step required.
 
 **Edge types:** `anchored_at` · `observes` · `produced_by` · `leads_to`
 
-**Ontologies:** `architectural` · `social` · `experiential` · `mythological` · `technical` · `personal`
+**Ontologies:** `architectural` · `social` · `experiential` · `mythological` · `technical` · `personal` · `bioregional`
+
+---
+
+## Knowledge Capsules
+
+The demo graph includes **knowledge capsules** — spatialized perspective nodes drawn from the [ROOM Hyperblog](https://innercartography.github.io/roomhyperblog/), [omb.wiki](https://omb.wiki), and [Resonance Lab](https://innercartography.github.io/resonance-labs/) field notes:
+
+| Capsule | Ontology | Location |
+|---------|----------|----------|
+| 🧠 The Collective Hippocampus | Technical | 16th Floor |
+| 🌐 The Spatial Fabric | Technical | 16th Floor |
+| 🏛️ Places Can Remember | Experiential | 16th Floor |
+| 📜 Open Standards | Technical | 16th Floor |
+| 📐 The Missing Semantic Layer | Technical | 16th Floor |
+| 🔒 Knowledge Sovereignty | Personal | 16th Floor |
+| 🔬 Resonance Lab — Field Notes | Social | 16th Floor |
+| 🏘️ Digital Villages | Social | Alien Lounge |
+| 🔮 Shards of Memory | Experiential | Alien Lounge |
+| 👽 Alien — Proving Humanity | Technical | Alien Lounge |
+| 🪙 Tokens in the Spatial Fabric | Social | Alien Lounge |
+
+---
+
+## Frontier Tower — The Demo Site
+
+Three spatial captures from the 1st Annual Open Metaverse Hackathon:
+
+| # | Location | Description |
+|:---:|----------|------------|
+| 1 | 🚪 **Lobby & Entrance** | Street-level threshold at 995 Market St |
+| 2 | 🛸 **The Alien Lounge** | Silver mylar, the Arecibo message, and alien.org — proving humanity in the age of AI |
+| 3 | ⚡ **16th Floor Hackathon Space** | Where builders gather and ROOM came alive |
 
 ---
 
@@ -154,10 +193,20 @@ Flat JSON graph — portable, human-readable, no build step required.
 
 | Partner | Role |
 |---------|------|
+| [**RP1**](https://enter.rp1.com) | Open metaverse browser · spatial fabric · the map of the metaverse |
 | [**arrival.space**](https://arrival.space) | Gaussian splat hosting + streaming |
 | [**Claudesidian**](https://github.com/heyitsnoah/claudesidian) | Obsidian markdown → ROOM Perspective nodes (personal knowledge graphs) |
 | [**Polycam**](https://poly.cam) | Spatial capture → `.ply` export for Place nodes |
-| **RP1 / Metaverse Standards Forum** | Open metaverse interoperability standards |
+| [**alien.org**](https://alien.org) | Decentralized human verification · token interoperability for spatial villages |
+| **Metaverse Standards Forum** | Open metaverse interoperability standards |
+
+---
+
+## Hyperblog
+
+ROOM is documented through a living hyperblog — a spatial essay that evolves with the project:
+
+**→ [ROOM Hyperblog v3](https://innercartography.github.io/roomhyperblog/)**
 
 ---
 
@@ -165,14 +214,7 @@ Flat JSON graph — portable, human-readable, no build step required.
 
 **Open Metaverse Hackathon** · March 7–8, 2026 · Frontier Tower, San Francisco
 
-ROOM is a **PLACES track** entry — building a semantic digital twin of Frontier Tower. Four spatial captures, multiple ontological perspectives, one shared memory graph.
-
-| # | Location | Description |
-|:---:|----------|------------|
-| 1 | 🏛️ **Building Exterior** | Street-level approach to Frontier Tower |
-| 2 | 🚪 **Main Lobby** | Threshold between the street and the spatial internet |
-| 3 | ⚡ **2nd Floor Hackathon Space** | Where builders gather |
-| 4 | 🛸 **The UFO Room** | The secret bonus level 👽 |
+ROOM is a **PLACES track** entry — building a semantic digital twin of Frontier Tower. Three spatial captures, eleven knowledge capsules, multiple ontological perspectives, one shared memory graph.
 
 ---
 
